@@ -1,0 +1,438 @@
+{
+  "version": "48题通用版",
+  "description": "标准评估，获得有深度的性格解读",
+  "questions": [
+    {
+      "id": 1,
+      "text": "同事在走廊上随口问你周末安排时，你的第一反应是心里暗想：能不能别聊了赶紧走",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "work",
+      "illustration": "door.left.hand.closed",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 2,
+      "text": "坐飞机旁边坐了个话痨陌生人，你反而觉得旅程变有趣了，聊了一路",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "airplane",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 3,
+      "text": "视频会议结束后，你不急着切换窗口，而是享受终于没人说话的安静",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "work",
+      "illustration": "video.slash.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 4,
+      "text": "健身房遇到一个同样在练深蹲的陌生人，你会自然地搭话交流动作要领",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "figure.run",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 5,
+      "text": "领导临时让你上台做即兴发言，你第一个念头是能不能让别人替你",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "stress",
+      "illustration": "person.wave.2",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 6,
+      "text": "搬到一个新小区的第一周，你就已经和物业、邻居、便利店老板都混熟了",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "social",
+      "illustration": "house.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 7,
+      "text": "朋友聚餐时你在角落和一个刚认识的人聊了两个小时，其他人都在开大桌趴",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "social",
+      "illustration": "bubble.left.and.bubble.right.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 8,
+      "text": "外卖小哥送错地址的时候，你顺便和他聊了五分钟本地的天气和路况",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "communication",
+      "illustration": "delivery.truck",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 9,
+      "text": "团建活动被分到和不太熟的同事住一间房，你心里已经开始盘算独处时间怎么争取",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "stress",
+      "illustration": "bed.double.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 10,
+      "text": "手机没电了被困在候车室两小时，你反而认识了三个新朋友还建了群",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "communication",
+      "illustration": "battery.25percent",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 11,
+      "text": "被人连续追问私人问题，你的内心OS是：能不能让我一个人待着缓缓",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "stress",
+      "illustration": "questionmark.folder.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 12,
+      "text": "客户临时取消了会议，你立刻给三个朋友发消息约饭补上这空闲的下午",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "calendar.badge.xmark",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 13,
+      "text": "组装宜家家具时，你严格按照说明书一步步来，绝不多想其他可能性",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "hammer.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 14,
+      "text": "看到路边一棵奇形怪状的树，你脑中已经构思了一篇完整的奇幻短故事",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "tree.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 15,
+      "text": "老板让你写方案，你第一件事就是搜集行业报告和竞品数据做对比",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "work",
+      "illustration": "doc.text.magnifyingglass",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 16,
+      "text": "听讲座时你注意到讲师说了一个似乎矛盾的论点，脑子里已经展开三页分析",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "learning",
+      "illustration": "book.circle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 17,
+      "text": "做菜时你会精确到克来称量食材，信奉菜谱就是真理",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "scalemass.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 18,
+      "text": "开会听到同事的方案时，你已经在脑中想象这个方案三年后的影响和演变",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "work",
+      "illustration": "globe.asia.australia.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 19,
+      "text": "读完一本小说，你能清晰地复述出所有角色的名字和关键情节细节",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "learning",
+      "illustration": "text.book.closed.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 20,
+      "text": "逛超市看到某个新饮料的包装设计，你联想到它背后可能代表的消费趋势",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "cart.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 21,
+      "text": "修家电时你先在网上查具体型号的维修手册再动手，绝不会凭直觉瞎鼓捣",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "decision",
+      "illustration": "wrench.and.screwdriver.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 22,
+      "text": "半夜失眠时你会不自觉地想象如果人类搬到火星会怎样建构社会体系",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "moon.stars.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 23,
+      "text": "汇报工作时你习惯用具体数字说话，精确到小数点后两位也在所不惜",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "communication",
+      "illustration": "number.circle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 24,
+      "text": "朋友给你推荐了一首歌，你听完立刻想到了一部电影、一段记忆和一个创业点子",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "communication",
+      "illustration": "music.note.list",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 25,
+      "text": "朋友分手后哭得稀里哗啦，你内心想的是：分析一下这段感情到底问题出在哪",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "social",
+      "illustration": "heart.slash.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 26,
+      "text": "同事方案做砸了被领导批评，你下班后主动约他喝杯咖啡陪他聊聊",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "work",
+      "illustration": "cup.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 27,
+      "text": "分配奖金时你主张严格按照绩效数据来定，不能因为谁可怜就多给",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "decision",
+      "illustration": "dollarsign.circle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 28,
+      "text": "团队里有人默默付出很多但从不邀功，你会特意在总结会上提出来肯定他",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "work",
+      "illustration": "hands.clap.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 29,
+      "text": "发现好朋友做的事情不道德时，你会选择当面指出，哪怕关系会变僵",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "decision",
+      "illustration": "exclamationmark.triangle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 30,
+      "text": "路边看到流浪猫受伤了，你第一反应是心疼到不行，立刻抱去找宠物医院",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "cat.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 31,
+      "text": "面试候选人时你更看重他的能力数据和过往业绩，不太在意他紧不紧张",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "work",
+      "illustration": "person.badge.key.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 32,
+      "text": "看完一部催泪电影，你周围人的情绪状态如何变化你一清二楚",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "theatermasks.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 33,
+      "text": "客户发脾气的时候你先分析他的诉求是什么，而不是先安抚他的情绪",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "stress",
+      "illustration": "megaphone.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 34,
+      "text": "群聊里有人发了条让别人难堪的消息，你会私聊安慰那个被冒犯的人",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "communication",
+      "illustration": "message.badge.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 35,
+      "text": "朋友之间产生利益纠纷时，你主张白纸黑字写清楚再合作，感情归感情",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "decision",
+      "illustration": "signature",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 36,
+      "text": "室友最近情绪低落但你不确定原因，你会默默帮忙倒垃圾和泡茶而不是追问",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "social",
+      "illustration": "trash.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 37,
+      "text": "每周日晚上你会花半小时把下周的日程表填满，连吃饭时间都标注好",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "calendar",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 38,
+      "text": "出门前查了攻略发现目的地有家隐秘小店，你果断绕路去探店",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "signpost.left.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 39,
+      "text": "你的文件管理就像一棵工整的树形结构，连草稿都按日期分文件夹归好",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "work",
+      "illustration": "folder.badge.person.crop.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 40,
+      "text": "凌晨两点灵感来了开始写东西，天亮了任务进度反而比计划超前了",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "work",
+      "illustration": "zzz",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 41,
+      "text": "约会时你会提前十五分钟到地点，顺便再确认一遍餐厅是否已预约",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "clock.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 42,
+      "text": "逛商场时你走到哪算到哪，看到有趣的店就钻进去，逛到关门才发现忘了买正事要的东西",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "bag.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 43,
+      "text": "接到新项目时你第一件事是画甘特图，把每个里程碑标注得清清楚楚",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "work",
+      "illustration": "chart.xyaxis.line",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 44,
+      "text": "午休时同事说附近新开了一家很火的店，你二话没说就跟着去了，下午的会先不管",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "social",
+      "illustration": "storefront.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 45,
+      "text": "搬家时你会提前打包好每个箱子并贴上详细标签，到了新家直接按编号归位",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "box.truck.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 46,
+      "text": "年假有七天，你拖到最后一周才开始想去哪，最后随便买了张特价机票就走",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "ticket.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 47,
+      "text": "你出门背包里的东西永远固定在同一个位置，钥匙永远在左边口袋",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "backpack.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 48,
+      "text": "考试前一天你还在纠结要不要换一种复习策略，结果两种都试了点",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "stress",
+      "illustration": "book.closed.fill",
+      "illustrationType": "sfSymbol"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: hbti-api
+    env: docker
+    repo: https://github.com/Doryyan/hbti-backend
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: PORT
+        value: "3000"
+    healthCheckPath: /api/admin/stats

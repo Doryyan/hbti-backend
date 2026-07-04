@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HBTI 管理后台</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.0/dist/floating-ui.dom.min.js"></script>
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#7B68EE; --accent2:#3CB371; --accent3:#FF6B81; --accent4:#DAA520;
+  --bg:#f0f2f5; --card:#fff; --text:#1d1d1f; --text2:#6e6e73; --text3:#a1a1a6;
+  --border:rgba(0,0,0,0.06); --shadow:rgba(0,0,0,0.04);
+  --radius:14px; --radius-sm:10px;
+  --sidebar-w:240px; --header-h:60px;
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Noto Sans SC,sans-serif;
+}
+*{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,0.12) transparent}
+html{font-size:15px}
+body{
+  font-family:var(--font); background:var(--bg); color:var(--text);
+  min-height:100vh; display:flex; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ===== LOGIN ===== */
+#login{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0.45); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  animation:fadeIn .35s ease}
+#login.hidden{display:none}
+.login-box{
+  background:var(--card); border-radius:24px; padding:44px 40px 36px;
+  width:380px; max-width:92vw; text-align:center;
+  box-shadow:0 24px 80px rgba(0,0,0,0.2); animation:scaleIn .35s ease
+}
+.login-box h1{font-size:28px;font-weight:700;margin-bottom:4px;
+  background:linear-gradient(135deg,#7B68EE,#3CB371);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.login-box p{color:var(--text2);font-size:14px;margin-bottom:24px}
+.login-box input[type=password]{
+  width:100%;padding:14px 16px;border:1.5px solid #e5e5e5;border-radius:var(--radius-sm);
+  font-size:15px;outline:none;transition:border-color .2s;background:var(--bg)
+}
+.login-box input[type=password]:focus{border-color:var(--accent)}
+.login-box .login-btn{
+  width:100%;margin-top:14px;padding:14px;border:none;border-radius:var(--radius-sm);
+  background:linear-gradient(135deg,#7B68EE,#3CB371);color:#fff;
+  font-size:16px;font-weight:600;cursor:pointer;transition:opacity .2s
+}
+.login-box .login-btn:hover{opacity:.9}
+.login-error{color:#FF3B30;font-size:13px;margin-top:10px;display:none}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  position:fixed;left:0;top:0;bottom:0;width:var(--sidebar-w);
+  background:#1a1a2e;z-index:100;display:flex;flex-direction:column;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);overflow:hidden
+}
+.sidebar-brand{
+  padding:20px 24px 16px;border-bottom:1px solid rgba(255,255,255,0.06);
+  flex-shrink:0
+}
+.sidebar-brand h1{
+  font-size:22px;font-weight:700;
+  background:linear-gradient(135deg,#7B68EE,#3CB371);-webkit-background-clip:text;-webkit-text-fill-color:transparent
+}
+.sidebar-brand p{font-size:11px;color:rgba(255,255,255,0.35);margin-top:1px}
+.sidebar-nav{flex:1;overflow-y:auto;padding:12px 0}
+.nav-item{
+  display:flex;align-items:center;gap:12px;padding:11px 20px 11px 24px;
+  color:rgba(255,255,255,0.55);cursor:pointer;transition:all .2s;
+  font-size:14px;border-right:3px solid transparent;text-decoration:none
+}
+.nav-item:hover{color:#fff;background:rgba(123,104,238,0.1)}
+.nav-item.active{color:#fff;background:rgba(123,104,238,0.15);border-right-color:var(--accent)}
+.nav-icon{width:20px;text-align:center;font-size:16px;flex-shrink:0}
+.nav-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-badge{
+  margin-left:auto;font-size:11px;padding:1px 8px;border-radius:10px;
+  background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.45)
+}
+.sidebar-footer{
+  padding:12px 20px;border-top:1px solid rgba(255,255,255,0.06);flex-shrink:0
+}
+.sidebar-footer button{
+  width:100%;padding:8px;background:rgba(255,255,255,0.06);
+  border:none;border-radius:8px;color:rgba(255,255,255,0.5);
+  font-size:13px;cursor:pointer;transition:background .2s
+}
+.sidebar-footer button:hover{background:rgba(255,255,255,0.1)}
+
+/* ===== MAIN ===== */
+.main{
+  margin-left:var(--sidebar-w);flex:1;min-height:100vh;
+  padding:24px 28px 40px;max-width:1400px
+}
+.main-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:28px;gap:16px;flex-wrap:wrap
+}
+.main-header h2{font-size:22px;font-weight:700}
+.header-right{display:flex;align-items:center;gap:12px}
+.header-date{color:var(--text2);font-size:13px}
+.mobile-menu-btn{
+  display:none;background:none;border:none;font-size:22px;
+  cursor:pointer;color:var(--text);padding:4px
+}
+
+/* ===== SECTION TABS ===== */
+.tab-content{display:none;animation:fadeUp .4s ease}
+.tab-content.active{display:block}
+.section{
+  background:var(--card);border-radius:var(--radius);
+  padding:22px 24px;box-shadow:0 1px 4px var(--shadow),0 4px 16px var(--shadow);
+  margin-bottom:20px
+}
+.section-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:18px;flex-wrap:wrap;gap:10px
+}
+.section-title{font-size:16px;font-weight:600}
+.section-action{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;color:var(--accent);cursor:pointer;
+  padding:6px 14px;border-radius:8px;
+  border:1px solid rgba(123,104,238,0.25);
+  background:transparent;transition:all .2s
+}
+.section-action:hover{background:rgba(123,104,238,0.06)}
+.chart-wrap{position:relative;height:280px}
+.chart-wrap.tall{height:340px}
+.chart-wrap.short{height:220px}
+
+/* ===== STATS CARDS ===== */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:16px;margin-bottom:22px
+}
+.stat-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:20px 22px;box-shadow:0 1px 4px var(--shadow),0 4px 16px var(--shadow);
+  position:relative;overflow:hidden;transition:transform .2s
+}
+.stat-card:hover{transform:translateY(-2px)}
+.stat-card .stat-accent{
+  position:absolute;top:0;left:0;right:0;height:3px
+}
+.stat-label{font-size:13px;color:var(--text2);margin-bottom:6px}
+.stat-value{
+  font-size:30px;font-weight:700;display:flex;align-items:baseline;gap:8px
+}
+.stat-sub{font-size:13px;color:var(--text2);margin-top:4px}
+
+/* ===== GRID LAYOUTS ===== */
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.charts-row.three{grid-template-columns:1fr 1fr 1fr}
+.charts-row.four{grid-template-columns:1fr 1fr 1fr 1fr}
+
+/* ===== TABLES ===== */
+.table-wrap{overflow-x:auto}
+.data-table{width:100%;border-collapse:collapse;font-size:14px}
+.data-table th{
+  text-align:left;padding:10px 14px;background:var(--bg);
+  font-weight:600;color:var(--text2);font-size:12px;text-transform:uppercase;
+  letter-spacing:.03em;border-bottom:1px solid var(--border);white-space:nowrap
+}
+.data-table td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text)}
+.data-table tr:hover td{background:rgba(123,104,238,0.02)}
+.data-table .type-badge{
+  display:inline-block;padding:2px 10px;border-radius:8px;
+  font-weight:600;font-size:13px;letter-spacing:.02em
+}
+.tag{display:inline-block;padding:2px 10px;border-radius:10px;font-size:12px;font-weight:600}
+.tag.good{color:#34C759;background:rgba(52,199,89,0.1)}
+.tag.ok{color:#FF9500;background:rgba(255,149,0,0.1)}
+.tag.poor{color:#FF3B30;background:rgba(255,59,48,0.1)}
+.empty-state{
+  text-align:center;padding:60px 20px;color:var(--text2)
+}
+.empty-state .empty-icon{font-size:48px;margin-bottom:12px;opacity:.3}
+.empty-state p{font-size:14px}
+
+/* ===== FUNNEL ===== */
+.funnel-step{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.funnel-label{font-size:13px;color:var(--text2);width:80px;text-align:right;flex-shrink:0}
+.funnel-bar-wrap{flex:1;height:36px;background:var(--bg);border-radius:8px;overflow:hidden;position:relative}
+.funnel-bar{
+  height:100%;border-radius:8px;display:flex;align-items:center;
+  padding-left:14px;color:#fff;font-size:13px;font-weight:600;
+  transition:width 1s cubic-bezier(.4,0,.2,1);min-width:40px
+}
+.funnel-rate{font-size:12px;color:var(--text2);width:52px;text-align:right;flex-shrink:0}
+
+/* ===== DIMENSION MINI CARDS ===== */
+.dim-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.dim-card{
+  text-align:center;padding:16px 12px;border-radius:var(--radius-sm);
+  background:var(--bg);transition:transform .2s
+}
+.dim-card:hover{transform:translateY(-2px)}
+.dim-card .dim-letter{
+  font-size:28px;font-weight:700;letter-spacing:.04em
+}
+.dim-card .dim-pct{
+  font-size:20px;font-weight:700;margin-top:4px
+}
+.dim-card .dim-name{font-size:12px;color:var(--text2);margin-top:2px}
+
+/* ===== VERSION REVENUE ===== */
+.rev-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
+.rev-row+.rev-row{border-top:1px solid var(--border)}
+.rev-row .rev-label{font-size:14px;font-weight:500}
+.rev-row .rev-val{font-size:14px;font-weight:600;color:var(--accent2)}
+
+/* ===== TIME FILTER ===== */
+.time-filter{display:flex;gap:6px}
+.time-filter button{
+  padding:5px 14px;border-radius:8px;border:1px solid var(--border);
+  background:transparent;font-size:13px;cursor:pointer;
+  color:var(--text2);transition:all .2s
+}
+.time-filter button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .charts-row{grid-template-columns:1fr}
+  .charts-row.three{grid-template-columns:1fr 1fr}
+  .charts-row.four{grid-template-columns:1fr 1fr}
+  .dim-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;padding:16px}
+  .mobile-menu-btn{display:block}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .charts-row.three,.charts-row.four{grid-template-columns:1fr}
+  .dim-grid{grid-template-columns:repeat(2,1fr)}
+  .main-header h2{font-size:18px}
+}
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:1fr}
+  .login-box{padding:32px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="login-box">
+    <h1>HBTI</h1>
+    <p>管理后台 · 请输入密码</p>
+    <input type="password" id="loginPass" placeholder="管理员密码" autofocus>
+    <div class="login-error" id="loginError">密码错误，请重试</div>
+    <button class="login-btn" onclick="doLogin()">进入后台</button>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <h1>HBTI</h1>
+    <p>数据管理后台</p>
+  </div>
+  <div class="sidebar-nav">
+    <a class="nav-item active" data-tab="overview" onclick="switchTab('overview',this)">
+      <span class="nav-icon">&#9670;</span><span class="nav-label">数据概览</span>
+    </a>
+    <a class="nav-item" data-tab="types" onclick="switchTab('types',this)">
+      <span class="nav-icon">&#9673;</span><span class="nav-label">类型分布</span>
+    </a>
+    <a class="nav-item" data-tab="versions" onclick="switchTab('versions',this)">
+      <span class="nav-icon">&#9632;</span><span class="nav-label">版本分析</span>
+    </a>
+    <a class="nav-item" data-tab="dimensions" onclick="switchTab('dimensions',this)">
+      <span class="nav-icon">&#9642;</span><span class="nav-label">维度统计</span>
+    </a>
+    <a class="nav-item" data-tab="funnel" onclick="switchTab('funnel',this)">
+      <span class="nav-icon">&#9654;</span><span class="nav-label">转化漏斗</span>
+    </a>
+    <a class="nav-item" data-tab="questions" onclick="switchTab('questions',this)">
+      <span class="nav-icon">&#9783;</span><span class="nav-label">题目分析</span>
+    </a>
+    <a class="nav-item" data-tab="users" onclick="switchTab('users',this)">
+      <span class="nav-icon">&#9786;</span><span class="nav-label">用户记录</span>
+    </a>
+  </div>
+  <div class="sidebar-footer">
+    <button onclick="logout()">退出登录</button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main" id="main">
+  <div class="main-header">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="mobile-menu-btn" onclick="toggleSidebar()">&#9776;</button>
+      <h2 id="pageTitle">数据概览</h2>
+    </div>
+    <div class="header-right">
+      <span class="header-date" id="headerDate"></span>
+      <div class="time-filter" id="timeFilter">
+        <button class="active" data-days="7">7天</button>
+        <button data-days="30">30天</button>
+        <button data-days="90">90天</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: OVERVIEW -->
+  <div class="tab-content active" id="tab-overview">
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <div class="stat-accent" style="background:linear-gradient(90deg,#7B68EE,#9B7BFF)"></div>
+        <div class="stat-label">总测试次数</div>
+        <div class="stat-value" id="statTotal" style="color:#7B68EE">--</div>
+        <div class="stat-sub">累计完成</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-accent" style="background:linear-gradient(90deg,#34C759,#68D88A)"></div>
+        <div class="stat-label">今日测试</div>
+        <div class="stat-value" id="statToday" style="color:#34C759">--</div>
+        <div class="stat-sub"><span id="todayDelta"></span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-accent" style="background:linear-gradient(90deg,#FF9500,#FFB340)"></div>
+        <div class="stat-label">付费转化率</div>
+        <div class="stat-value" id="statConversion" style="color:#FF9500">--</div>
+        <div class="stat-sub">测试用户 → 付费</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-accent" style="background:linear-gradient(90deg,#FF6B81,#FF8FA3)"></div>
+        <div class="stat-label">测试完成率</div>
+        <div class="stat-value" id="statCompletion" style="color:#FF6B81">--</div>
+        <div class="stat-sub">开始 → 完成</div>
+      </div>
+    </div>
+
+    <div class="charts-row">
+      <div class="section">
+        <div class="section-header">
+          <span class="section-title">各版本使用分布</span>
+        </div>
+        <div class="chart-wrap short"><canvas id="overviewVersionChart"></canvas></div>
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <span class="section-title">人格类型 TOP 8</span>
+        </div>
+        <div class="chart-wrap short"><canvas id="overviewTypeChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">测试趋势</span>
+        <button class="section-action" onclick="exportTrendCSV()">&#9660; 导出CSV</button>
+      </div>
+      <div class="chart-wrap tall"><canvas id="trendChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- TAB: TYPES -->
+  <div class="tab-content" id="tab-types">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">16型人格完整分布</span>
+        <span style="font-size:12px;color:var(--text2)" id="typeSampleSize"></span>
+      </div>
+      <div class="chart-wrap tall"><canvas id="typeChart"></canvas></div>
+    </div>
+    <div class="charts-row">
+      <div class="section">
+        <div class="section-header"><span class="section-title">四大族群占比</span></div>
+        <div class="chart-wrap"><canvas id="groupChart"></canvas></div>
+      </div>
+      <div class="section">
+        <div class="section-header"><span class="section-title">类型稀有度排行</span></div>
+        <div class="chart-wrap"><canvas id="rarityChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: VERSIONS -->
+  <div class="tab-content" id="tab-versions">
+    <div class="charts-row">
+      <div class="section">
+        <div class="section-header"><span class="section-title">版本使用占比</span></div>
+        <div class="chart-wrap"><canvas id="versionPieChart"></canvas></div>
+      </div>
+      <div class="section">
+        <div class="section-header"><span class="section-title">营收预估</span></div>
+        <div id="revenuePanel"></div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header"><span class="section-title">版本使用趋势</span></div>
+      <div class="chart-wrap tall"><canvas id="versionTrendChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- TAB: DIMENSIONS -->
+  <div class="tab-content" id="tab-dimensions">
+    <div class="dim-grid" id="dimSummary"></div>
+    <div class="charts-row" style="margin-top:20px">
+      <div class="section">
+        <div class="section-header"><span class="section-title">E/I 外向 — 内向</span></div>
+        <div class="chart-wrap"><canvas id="eiChart"></canvas></div>
+      </div>
+      <div class="section">
+        <div class="section-header"><span class="section-title">S/N 感觉 — 直觉</span></div>
+        <div class="chart-wrap"><canvas id="snChart"></canvas></div>
+      </div>
+    </div>
+    <div class="charts-row" style="margin-top:0">
+      <div class="section">
+        <div class="section-header"><span class="section-title">T/F 思考 — 情感</span></div>
+        <div class="chart-wrap"><canvas id="tfChart"></canvas></div>
+      </div>
+      <div class="section">
+        <div class="section-header"><span class="section-title">J/P 判断 — 知觉</span></div>
+        <div class="chart-wrap"><canvas id="jpChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: FUNNEL -->
+  <div class="tab-content" id="tab-funnel">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">用户行为转化漏斗</span>
+        <span style="font-size:12px;color:var(--text2)">基于全部历史数据</span>
+      </div>
+      <div id="funnelContainer"></div>
+    </div>
+    <div class="charts-row">
+      <div class="section">
+        <div class="section-header"><span class="section-title">各阶段流失分析</span></div>
+        <div class="chart-wrap"><canvas id="dropoffChart"></canvas></div>
+      </div>
+      <div class="section">
+        <div class="section-header"><span class="section-title">各版本付费转化</span></div>
+        <div class="chart-wrap"><canvas id="versionConversionChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: QUESTIONS -->
+  <div class="tab-content" id="tab-questions">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">题目区分度分析</span>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <span class="tag good">高 &gt;0.4</span>
+          <span class="tag ok">中 0.2~0.4</span>
+          <span class="tag poor">低 &lt;0.2</span>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>题号</th><th>维度</th><th>平均分</th><th>标准差</th><th>区分度</th><th>答题数</th><th>评估</th></tr>
+          </thead>
+          <tbody id="questionTable"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="charts-row">
+      <div class="section">
+        <div class="section-header"><span class="section-title">题目平均分分布</span></div>
+        <div class="chart-wrap"><canvas id="scoreDistChart"></canvas></div>
+      </div>
+      <div class="section">
+        <div class="section-header"><span class="section-title">区分度直方图</span></div>
+        <div class="chart-wrap"><canvas id="discChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: USERS -->
+  <div class="tab-content" id="tab-users">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">最近 50 条测试记录</span>
+        <button class="section-action" onclick="exportUsersCSV()">&#9660; 导出CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>匿名ID</th><th>类型</th><th>版本</th><th>时间</th><th>设备</th></tr>
+          </thead>
+          <tbody id="userTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+// ===== CONFIG =====
+const API_BASE = location.origin + '/api/admin';
+const TYPE_GROUP_MAP = {
+  'INTJ':'analyst','INTP':'analyst','ENTJ':'analyst','ENTP':'analyst',
+  'INFJ':'diplomat','INFP':'diplomat','ENFJ':'diplomat','ENFP':'diplomat',
+  'ISTJ':'sentinel','ISFJ':'sentinel','ESTJ':'sentinel','ESFJ':'sentinel',
+  'ISTP':'explorer','ISFP':'explorer','ESTP':'explorer','ESFP':'explorer'
+};
+const GROUP_COLORS = { analyst:'#7B68EE', diplomat:'#3CB371', sentinel:'#4169E1', explorer:'#DAA520' };
+const GROUP_NAMES = { analyst:'分析家', diplomat:'外交家', sentinel:'守护者', explorer:'探险家' };
+const TYPE_COLORS = {
+  'INTJ':'#7B68EE','INTP':'#8870F0','ENTJ':'#9678F8','ENTP':'#A480FF',
+  'INFJ':'#3CB371','INFP':'#50C080','ENFJ':'#64CF8F','ENFP':'#78DE9E',
+  'ISTJ':'#4169E1','ISFJ':'#5578E5','ESTJ':'#6987E9','ESFJ':'#7D96ED',
+  'ISTP':'#DAA520','ISFP':'#E0B030','ESTP':'#E6BB40','ESFP':'#ECC650'
+};
+const DIM_COLORS = { EI:'#7B68EE', SN:'#00BFA5', TF:'#FF6B81', JP:'#34C759' };
+const VERSION_NAMES = { '28题简版':'简版','48题通用版':'通用版','93题完整版':'完整版' };
+const VERSION_PRICES = { '28题简版':0, '48题通用版':9.9, '93题完整版':29.9 };
+
+// ===== STATE =====
+let charts = {};
+let cached = {};
+let timeRange = 7;
+
+// ===== LOGIN =====
+function doLogin(){
+  const pass = document.getElementById('loginPass').value;
+  if(pass === 'hbti2026'){
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('loginError').style.display = 'none';
+    document.getElementById('loginPass').value = '';
+    initDashboard();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+document.getElementById('loginPass').addEventListener('keypress',e=>{
+  if(e.key==='Enter') doLogin();
+});
+function logout(){
+  document.getElementById('login').classList.remove('hidden');
+  document.getElementById('loginPass').value='';
+  document.getElementById('loginPass').focus();
+}
+
+// ===== SIDEBAR =====
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+}
+document.addEventListener('click',function(e){
+  const s=document.getElementById('sidebar');
+  if(window.innerWidth<=768 && s.classList.contains('open') && !s.contains(e.target) && !e.target.closest('.mobile-menu-btn')){
+    s.classList.remove('open');
+  }
+});
+
+// ===== TAB SWITCHING =====
+function switchTab(tabId, el){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('tab-'+tabId).classList.add('active');
+  if(el) el.classList.add('active');
+  const titles={overview:'数据概览',types:'类型分布',versions:'版本分析',dimensions:'维度统计',funnel:'转化漏斗',questions:'题目分析',users:'用户记录'};
+  document.getElementById('pageTitle').textContent=titles[tabId]||tabId;
+  if(window.innerWidth<=768) document.getElementById('sidebar').classList.remove('open');
+  // Resize charts
+  setTimeout(()=>{
+    Object.values(charts).forEach(c=>{if(c&&c.resize)c.resize();});
+  },100);
+}
+
+// ===== TIME FILTER =====
+document.getElementById('timeFilter').addEventListener('click',function(e){
+  const btn=e.target.closest('button');
+  if(!btn) return;
+  this.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  timeRange=parseInt(btn.dataset.days);
+  refreshCharts();
+});
+
+// ===== DASHBOARD INIT =====
+async function initDashboard(){
+  document.getElementById('headerDate').textContent='更新至：'+new Date().toLocaleDateString('zh-CN');
+  await refreshCharts();
+  setInterval(refreshCharts,60000);
+}
+
+async function refreshCharts(){
+  try{
+    const data = await Promise.all([
+      fetchJSON('/stats'),
+      fetchJSON('/type-distribution'),
+      fetchJSON('/version-distribution'),
+      fetchJSON('/trend'),
+      fetchJSON('/questions'),
+      fetchJSON('/dimensions'),
+      fetchJSON('/funnel'),
+      fetchJSON('/users')
+    ]);
+    cached={stats:data[0],types:data[1],versions:data[2],trend:data[3],questions:data[4],dimensions:data[5],funnel:data[6],users:data[7]};
+    renderAll();
+  }catch(e){
+    console.error('Failed to load data:',e);
+    // Show empty states
+    setEmptyState();
+  }
+}
+
+async function fetchJSON(endpoint){
+  const r=await fetch(API_BASE+endpoint);
+  if(!r.ok) return null;
+  return r.json();
+}
+
+// ===== RENDER ALL =====
+function renderAll(){
+  renderStats();
+  renderOverviewCharts();
+  renderTypeCharts();
+  renderVersionCharts();
+  renderDimensionCharts();
+  renderFunnel();
+  renderQuestionTable();
+  renderUserTable();
+}
+
+function setEmptyState(){
+  ['statTotal','statToday','statConversion','statCompletion'].forEach(id=>{
+    document.getElementById(id).textContent='--';
+  });
+}
+
+// ===== STATS =====
+function renderStats(){
+  const s=cached.stats;
+  if(!s) return;
+  document.getElementById('statTotal').textContent=s.totalTests ?? '--';
+  document.getElementById('statToday').textContent=s.todayTests ?? '--';
+  document.getElementById('statConversion').textContent=(s.conversionRate!=null?s.conversionRate.toFixed(1)+'%':'--');
+  document.getElementById('statCompletion').textContent=(s.completionRate!=null?s.completionRate.toFixed(1)+'%':'--');
+}
+
+// ===== OVERVIEW CHARTS =====
+function renderOverviewCharts(){
+  // Version distribution (doughnut)
+  const vData=cached.versions;
+  if(vData && vData.length){
+    const labels=vData.map(d=>d.version);
+    const vals=vData.map(d=>d.count);
+    const colors=['#7B68EE','#FF9500','#34C759'];
+    renderChart('overviewVersionChart','doughnut',labels,[{data:vals,backgroundColor:colors,borderWidth:0,borderRadius:4}],{
+      plugins:{legend:{position:'bottom',labels:{boxWidth:12,boxHeight:12,font:{size:11}}}},
+      cutout:'65%'
+    });
+  }
+  // Type TOP 8 (horizontal bar)
+  const tData=cached.types;
+  if(tData && tData.length){
+    const sorted=[...tData].sort((a,b)=>b.count-a.count).slice(0,8);
+    const labels=sorted.map(d=>d.type_code);
+    const vals=sorted.map(d=>d.count);
+    const colors=labels.map(l=>TYPE_COLORS[l]||'#7B68EE');
+    renderChart('overviewTypeChart','bar',labels.reverse(),[{
+      data:vals.reverse(),backgroundColor:colors.reverse(),borderRadius:6,borderSkipped:false
+    }],{
+      indexAxis:'y',plugins:{legend:{display:false}},
+      scales:{x:{beginAtZero:true,grid:{display:false}},y:{grid:{display:false}}}
+    });
+  }
+}
+
+// ===== TYPE CHARTS =====
+function renderTypeCharts(){
+  const tData=cached.types;
+  if(!tData || !tData.length) return;
+  const allTypes='INTJ,INTP,ENTJ,ENTP,INFJ,INFP,ENFJ,ENFP,ISTJ,ISFJ,ESTJ,ESFJ,ISTP,ISFP,ESTP,ESFP'.split(',');
+  const typeMap={}; tData.forEach(d=>{typeMap[d.type_code]=d.count;});
+  const labels=allTypes;
+  const vals=allTypes.map(t=>typeMap[t]||0);
+  const colors=labels.map(l=>TYPE_COLORS[l]||'#7B68EE');
+  const total=vals.reduce((a,b)=>a+b,0);
+  document.getElementById('typeSampleSize').textContent='样本量：'+total.toLocaleString()+' 人';
+
+  renderChart('typeChart','bar',labels,[{
+    data:vals,backgroundColor:colors,borderRadius:6,borderSkipped:false
+  }],{
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.y+' 人 ('+(total>0?(ctx.parsed.y/total*100).toFixed(1):0)+'%)'}}},
+    scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.04)'}}}
+  });
+
+  // Group distribution (doughnut)
+  const grpCounts={analyst:0,diplomat:0,sentinel:0,explorer:0};
+  allTypes.forEach(t=>{
+    const g=TYPE_GROUP_MAP[t];
+    grpCounts[g]=(grpCounts[g]||0)+(typeMap[t]||0);
+  });
+  const grpLabels=Object.keys(grpCounts).map(k=>GROUP_NAMES[k]);
+  const grpVals=Object.values(grpCounts);
+  const grpColors=['#7B68EE','#3CB371','#4169E1','#DAA520'];
+  renderChart('groupChart','doughnut',grpLabels,[{
+    data:grpVals,backgroundColor:grpColors,borderWidth:0
+  }],{
+    plugins:{legend:{position:'bottom',labels:{boxWidth:12,boxHeight:12,font:{size:11}}}},
+    cutout:'62%'
+  });
+
+  // Rarity (sorted ascending)
+  const sorted=[...allTypes].map(t=>({type:t,count:typeMap[t]||0})).sort((a,b)=>a.count-b.count);
+  const rLabels=sorted.map(d=>d.type);
+  const rVals=sorted.map(d=>d.count);
+  const rColors=rLabels.map(l=>TYPE_COLORS[l]||'#7B68EE');
+  renderChart('rarityChart','bar',rLabels,[{
+    data:rVals,backgroundColor:rColors,borderRadius:6,borderSkipped:false
+  }],{
+    indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.x+' 人'}}},
+    scales:{x:{beginAtZero:true,grid:{display:false}},y:{grid:{display:false}}}
+  });
+}
+
+// ===== VERSION CHARTS =====
+function renderVersionCharts(){
+  const vData=cached.versions;
+  if(!vData || !vData.length) return;
+  const labels=vData.map(d=>d.version);
+  const vals=vData.map(d=>d.count);
+  const colors=['#7B68EE','#FF9500','#34C759'];
+  renderChart('versionPieChart','doughnut',labels,[{
+    data:vals,backgroundColor:colors,borderWidth:0
+  }],{
+    plugins:{legend:{position:'bottom',labels:{boxWidth:12,boxHeight:12,font:{size:11}}}},
+    cutout:'60%'
+  });
+
+  // Revenue panel
+  const total=vData.reduce((a,b)=>a+b.count,0);
+  let revHTML='<div style="padding:4px 0">';
+  revHTML+='<div class="rev-row"><span class="rev-label">总计测试</span><span class="rev-val">'+total+' 次</span></div>';
+  let estRev=0;
+  vData.forEach(d=>{
+    const price=VERSION_PRICES[d.version]||0;
+    const sub=d.count*price*0.75; // after Apple 25% cut
+    const pct=total>0?(d.count/total*100).toFixed(1):0;
+    revHTML+='<div class="rev-row"><span class="rev-label">'+d.version+'</span><span class="rev-val">'+d.count+' 次 ('+pct+'%)</span></div>';
+    if(price>0) estRev+=sub;
+  });
+  revHTML+='<div class="rev-row" style="border-top:2px solid var(--accent);margin-top:6px;padding-top:14px">';
+  revHTML+='<span class="rev-label" style="font-weight:600">预估收益（税后）</span>';
+  revHTML+='<span class="rev-val" style="font-size:18px;color:var(--accent)">¥'+estRev.toFixed(2)+'</span></div>';
+  revHTML+='<div style="font-size:11px;color:var(--text2);margin-top:4px">* 扣除 Apple 25% 佣金后的估算值</div>';
+  revHTML+='</div>';
+  document.getElementById('revenuePanel').innerHTML=revHTML;
+
+  // Version trend - use trend data if possible, else aggregate from funnel
+  const trend=cached.trend;
+  if(trend && trend.length){
+    const days=trend.map(d=>d.date.slice(5));
+    // We'll show overall trend since we don't have per-version trend from API
+    const started=trend.map(d=>d.startedTests||0);
+    const completed=trend.map(d=>d.completedTests||0);
+    renderChart('versionTrendChart','line',days,[
+      {label:'开始测试',data:started,borderColor:'#7B68EE',backgroundColor:'rgba(123,104,238,0.08)',fill:true,tension:.4,pointRadius:3},
+      {label:'完成测试',data:completed,borderColor:'#34C759',backgroundColor:'rgba(52,199,89,0.08)',fill:true,tension:.4,pointRadius:3}
+    ],{
+      plugins:{legend:{position:'top',labels:{boxWidth:12,boxHeight:12,font:{size:11}}}},
+      scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.04)'}}},
+      interaction:{intersect:false,mode:'index'}
+    });
+  }
+}
+
+// ===== DIMENSION CHARTS =====
+function renderDimensionCharts(){
+  const dimData=cached.dimensions;
+  if(!dimData || !dimData.length) return;
+
+  // Summary cards
+  let sumHTML='';
+  dimData.forEach(d=>{
+    const color=DIM_COLORS[d.dimension]||'#7B68EE';
+    const total=d.left.count+d.right.count;
+    const dominant=d.left.count>=d.right.count?d.left.side:d.right.side;
+    const dominantPct=d.left.count>=d.right.count?d.left.percentage:d.right.percentage;
+    sumHTML+=`<div class="dim-card" style="border-left:3px solid ${color}">
+      <div class="dim-letter" style="color:${color}">${dominant}</div>
+      <div class="dim-pct">${dominantPct}%</div>
+      <div class="dim-name">${d.dimension} (${total}人)</div>
+    </div>`;
+  });
+  document.getElementById('dimSummary').innerHTML=sumHTML;
+
+  // Individual dimension charts
+  const dimInfo=[
+    {key:'EI',id:'ei',left:'内 向',right:'外 向'},
+    {key:'SN',id:'sn',left:'感觉',right:'直觉'},
+    {key:'TF',id:'tf',left:'情感',right:'思考'},
+    {key:'JP',id:'jp',left:'知觉',right:'判断'},
+  ];
+  dimInfo.forEach(info=>{
+    const data=dimData.find(d=>d.dimension===info.key);
+    if(!data) return;
+    const color=DIM_COLORS[info.key]||'#7B68EE';
+    const total=data.left.count+data.right.count||1;
+    renderChart(info.id+'Chart','doughnut',[info.left,info.right],[{
+      data:[data.left.count,data.right.count],
+      backgroundColor:[color,color+'40'],
+      borderWidth:0
+    }],{
+      plugins:{
+        legend:{position:'bottom',labels:{boxWidth:12,boxHeight:12,font:{size:11}}},
+        tooltip:{callbacks:{
+          label:ctx=>ctx.label+': '+ctx.parsed+' 人 ('+(ctx.parsed/total*100).toFixed(1)+'%)'
+        }}
+      },
+      cutout:'68%'
+    });
+  });
+}
+
+// ===== FUNNEL =====
+function renderFunnel(){
+  const fData=cached.funnel;
+  if(!fData || !fData.length){
+    document.getElementById('funnelContainer').innerHTML='<div class="empty-state"><div class="empty-icon">&#9654;</div><p>暂无漏斗数据</p></div>';
+    return;
+  }
+  const maxCount=Math.max(...fData.map(s=>s.count),1);
+  const colors=['#7B68EE','#7B68EE','#3CB371','#FF9500','#FF6B81'];
+  let html='';
+
+  // Build step data with rates
+  const steps=fData.map((s,i)=>{
+    const prev=i===0?s.count:fData[i-1].count;
+    const rate=i===0?100:prev>0?Math.round(s.count/prev*100):0;
+    const totalRate=i===0?100:Math.round(s.count/fData[0].count*100);
+    return {...s,rate,totalRate};
+  });
+
+  steps.forEach((s,i)=>{
+    const w=Math.max(Math.round(s.count/maxCount*100),4);
+    html+=`<div class="funnel-step">
+      <span class="funnel-label">${s.step||s.label||s.event||'步骤'+(i+1)}</span>
+      <div class="funnel-bar-wrap">
+        <div class="funnel-bar" style="width:${w}%;background:linear-gradient(90deg,${colors[i%colors.length]},${colors[i%colors.length]}aa)">
+          ${s.count}人
+        </div>
+      </div>
+      <span class="funnel-rate" style="font-weight:${s.rate>=70?'600':'400'};color:${s.rate<50?'#FF6B81':s.rate<70?'#FF9500':'var(--accent2)'}">
+        ${s.rate}%
+      </span>
+    </div>
+    ${i<steps.length-1?`<div style="text-align:center;font-size:11px;color:var(--text3);margin:-2px 0 6px 94px">流失 ${100-s.rate}% · 总转化 ${s.totalRate}%</div>`:''}`;
+  });
+  document.getElementById('funnelContainer').innerHTML=html;
+
+  // Dropoff chart
+  const dropLabels=steps.slice(1).map(s=>s.step||s.label||'');
+  const dropVals=steps.slice(0,-1).map((s,i)=>s.count-steps[i+1].count);
+  renderChart('dropoffChart','bar',dropLabels,[{
+    label:'流失人数',data:dropVals,backgroundColor:'#FF6B81',borderRadius:6
+  }],{
+    plugins:{legend:{display:false}},
+    scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.04)'}}}
+  });
+
+  // Version conversion - aggregate from available data
+  const vData=cached.versions;
+  if(vData && vData.length){
+    const vLabels=vData.map(d=>d.version);
+    const vCounts=vData.map(d=>d.count);
+    // Estimated paid conversion (roughly 3-5% of completed tests)
+    const estPaid=vCounts.map(c=>Math.round(c*0.04));
+    renderChart('versionConversionChart','bar',vLabels,[
+      {label:'完成测试',data:vCounts,backgroundColor:'#7B68EE',borderRadius:6,borderSkipped:false},
+      {label:'预估付费',data:estPaid,backgroundColor:'#FF9500',borderRadius:6,borderSkipped:false}
+    ],{
+      plugins:{legend:{position:'top',labels:{boxWidth:12,boxHeight:12,font:{size:11}}}},
+      scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.04)'}}}
+    });
+  }
+}
+
+// ===== QUESTION TABLE =====
+function renderQuestionTable(){
+  const qData=cached.questions;
+  const tbody=document.getElementById('questionTable');
+  if(!qData || !qData.length){
+    tbody.innerHTML='<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text2)">暂无题目分析数据，等待用户完成测试后生成</td></tr>';
+    renderChart('scoreDistChart','bar',['暂无'],[{data:[0],backgroundColor:'#ccc',borderRadius:4}],{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}});
+    renderChart('discChart','bar',['暂无'],[{data:[0],backgroundColor:'#ccc',borderRadius:4}],{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}});
+    return;
+  }
+  tbody.innerHTML=qData.map(q=>{
+    const disc=q.stddev||0;
+    const tagCls=disc>0.4?'good':disc>0.2?'ok':'poor';
+    const tagLbl=disc>0.4?'优秀':disc>0.2?'中等':'需优化';
+    return `<tr>
+      <td>${q.questionId||q.questionID||'--'}</td>
+      <td>--</td>
+      <td>${(q.avgScore||0).toFixed(2)}</td>
+      <td>${(q.stddev||0).toFixed(2)}</td>
+      <td>${disc.toFixed(2)}</td>
+      <td>${q.answerCount||0}</td>
+      <td><span class="tag ${tagCls}">${tagLbl}</span></td>
+    </tr>`;
+  }).join('');
+
+  // Score distribution histogram
+  const scores=qData.map(q=>q.avgScore||0);
+  const sHist=makeHistogram(scores,5);
+  renderChart('scoreDistChart','bar',sHist.labels,[{
+    data:sHist.counts,backgroundColor:'#7B68EE',borderRadius:6
+  }],{
+    plugins:{legend:{display:false}},
+    scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.04)'}}}
+  });
+
+  // Discrimination histogram
+  const discs=qData.map(q=>q.stddev||0);
+  const dHist=makeHistogram(discs,5);
+  renderChart('discChart','bar',dHist.labels,[{
+    data:dHist.counts,backgroundColor:'#00BFA5',borderRadius:6
+  }],{
+    plugins:{legend:{display:false}},
+    scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.04)'}}}
+  });
+}
+
+// ===== USER TABLE =====
+function renderUserTable(){
+  const uData=cached.users;
+  const tbody=document.getElementById('userTable');
+  if(!uData || !uData.length){
+    tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--text2)">暂无用户数据</td></tr>';
+    return;
+  }
+  tbody.innerHTML=uData.map(u=>{
+    const type=u.typeCode||u.type_code||'--';
+    const color=TYPE_COLORS[type]||'#86868b';
+    const ver=VERSION_NAMES[u.testVersion||u.test_version]||(u.testVersion||'--');
+    const time=u.timestamp?u.timestamp.slice(0,16).replace('T',' '):'--';
+    const device='';
+    return `<tr>
+      <td style="font-family:monospace;font-size:12px">${(u.anonymousID||u.anonymous_id||'').slice(0,8)}</td>
+      <td><span class="type-badge" style="background:${color}15;color:${color}">${type}</span></td>
+      <td>${ver}</td>
+      <td style="font-size:12px;color:var(--text2)">${time}</td>
+      <td style="font-size:12px;color:var(--text2)">${device||'--'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ===== HELPERS =====
+function renderChart(canvasId,type,labels,datasets,opts){
+  const canvas=document.getElementById(canvasId);
+  if(!canvas) return;
+  if(charts[canvasId]){charts[canvasId].destroy();}
+  const ctx=canvas.getContext('2d');
+  const config={
+    type:type,
+    data:{labels:labels,datasets:datasets},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      animation:{duration:800,easing:'easeOutQuart'},
+      ...opts
+    }
+  };
+  charts[canvasId]=new Chart(ctx,config);
+}
+
+function makeHistogram(values,bins=5){
+  if(!values.length) return {labels:['0'],counts:[0]};
+  const min=Math.min(...values);
+  const max=Math.max(...values);
+  const range=max-min||1;
+  const w=range/bins;
+  const counts=new Array(bins).fill(0);
+  const labels=[];
+  values.forEach(v=>{
+    const idx=Math.min(Math.floor((v-min)/w),bins-1);
+    counts[idx]++;
+  });
+  for(let i=0;i<bins;i++){
+    const lo=(min+i*w).toFixed(2);
+    const hi=(min+(i+1)*w).toFixed(2);
+    labels.push(lo+'~'+hi);
+  }
+  return {labels,counts};
+}
+
+// ===== EXPORT =====
+function exportTrendCSV(){
+  const t=cached.trend;
+  if(!t||!t.length){alert('暂无趋势数据');return;}
+  const h='日期,开始测试,完成测试\n';
+  const r=t.map(d=>`${d.date},${d.startedTests||0},${d.completedTests||0}`).join('\n');
+  downloadCSV(h+r,'hbti_trend_'+new Date().toISOString().slice(0,10)+'.csv');
+}
+
+function exportUsersCSV(){
+  const u=cached.users;
+  if(!u||!u.length){alert('暂无用户数据');return;}
+  const h='匿名ID,类型,版本,时间\n';
+  const r=u.map(u=>{
+    const type=u.typeCode||u.type_code||'--';
+    const ver=VERSION_NAMES[u.testVersion||u.test_version]||(u.testVersion||'--');
+    const time=u.timestamp?u.timestamp.slice(0,16).replace('T',' '):'--';
+    return `${u.anonymousID||u.anonymous_id||''},${type},${ver},${time}`;
+  }).join('\n');
+  downloadCSV(h+r,'hbti_users_'+new Date().toISOString().slice(0,10)+'.csv');
+}
+
+function downloadCSV(content,filename){
+  const blob=new Blob(['\uFEFF'+content],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// ===== KEYBOARD SHORTCUTS =====
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape' && !document.getElementById('login').classList.contains('hidden')) return;
+  if(e.ctrlKey && e.key>='1'&&e.key<='7'){
+    const tabs=['overview','types','versions','dimensions','funnel','questions','users'];
+    const idx=parseInt(e.key)-1;
+    if(idx<tabs.length){
+      const el=document.querySelector(`.nav-item[data-tab="${tabs[idx]}"]`);
+      if(el) switchTab(tabs[idx],el);
+    }
+  }
+});
+</script>
+</body>
+</html>

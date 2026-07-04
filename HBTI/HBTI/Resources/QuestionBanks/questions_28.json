@@ -1,0 +1,258 @@
+{
+  "version": "28题简版",
+  "description": "快速了解你的性格类型，适合初次体验",
+  "questions": [
+    {
+      "id": 1,
+      "text": "团建晚宴散场后，你第一反应是想赶紧回家窝沙发上回血，还是拉几个人再去喝一杯",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "social",
+      "illustration": "sofa.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 2,
+      "text": "搬进新小区第一周，你已经和邻居们聊熟了，还加了几个人的微信",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "social",
+      "illustration": "house.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 3,
+      "text": "连续开了一下午的会，你最想做的不是和同事复盘，而是戴上耳机一个人静静待着",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "stress",
+      "illustration": "headphones",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 4,
+      "text": "一个人出差时，你会主动约当地的朋友吃顿饭，顺便逛逛这座城市",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "airplane",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 5,
+      "text": "遇到复杂问题时，你习惯先自己想清楚再来找人讨论，而不是边聊边理清思路",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "work",
+      "illustration": "lightbulb.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 6,
+      "text": "被困在家里一整天没出门，你会觉得浑身发闷，恨不得马上出去见见人",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "figure.walk",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 7,
+      "text": "收到一条好消息时，你更想在心里默默感受一下，而不是立刻告诉所有人",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "communication",
+      "illustration": "heart.text.square.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 8,
+      "text": "逛博物馆时，你会仔细读每件展品的说明文字，而不只是走马观花拍几张照",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "building.columns.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 9,
+      "text": "看到一个旧物的瞬间，你脑中突然冒出它背后的故事和无数种可能的用途",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "learning",
+      "illustration": "wand.and.stars.inverse",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 10,
+      "text": "修家电时，你更愿意按说明书一步步排查故障，而不是凭直觉乱拧一通",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "decision",
+      "illustration": "wrench.and.screwdriver.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 11,
+      "text": "听完一场讲座，你最感兴趣的不是数据本身，而是它暗示的未来趋势和可能性",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "learning",
+      "illustration": "chart.line.uptrend.xyaxis",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 12,
+      "text": "做饭时你会严格按菜谱来，精确到克，而不是凭着感觉随手一抓",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "fork.knife",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 13,
+      "text": "和朋友聊起一部刚看完的电影，你更想讨论导演想表达的深层隐喻",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "communication",
+      "illustration": "film.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 14,
+      "text": "到新公司上班第一天，你会先搞清楚报销流程和空调遥控器在哪",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "work",
+      "illustration": "doc.text.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 15,
+      "text": "同事方案有明显漏洞，你会直接说出来，哪怕当着所有人的面有些尴尬",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "work",
+      "illustration": "exclamationmark.triangle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 16,
+      "text": "看到朋友发了一条伤感的动态，你会先放下手头的事去关心对方的情况",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "social",
+      "illustration": "hand.raised.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 17,
+      "text": "选餐厅时你会先分析评分、人均和评价关键词，而不是凭感觉不错就进去",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "decision",
+      "illustration": "magnifyingglass",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 18,
+      "text": "小组讨论时如果有人被冷落了，你会主动把话头递给对方，让对方参与进来",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "communication",
+      "illustration": "bubble.left.and.text.bubble.right.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 19,
+      "text": "给朋友送礼时，你会根据对方真正需要的实用价值来挑选，而不是送礼物的仪式感",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "social",
+      "illustration": "giftcard.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 20,
+      "text": "看完一部电影，你最先记得的是哪个角色让你心疼，而不是剧情逻辑通不通",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "theatermasks.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 21,
+      "text": "面对两份工作offer，你会用表格逐条对比薪资、发展、通勤等条件再做决定",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "decision",
+      "illustration": "tablecells.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 22,
+      "text": "收到周末活动的邀请，你会先确认具体时间地点和流程再决定去不去",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "calendar",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 23,
+      "text": "出门旅行你更爱走到哪算哪，发现有趣的小巷就拐进去看看，走错路也不慌",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "map.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 24,
+      "text": "你的桌面永远只放正在用的东西，文件按颜色标签分得清清楚楚",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "work",
+      "illustration": "folder.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 25,
+      "text": "Deadline前一天晚上灵感突然爆发，你反而觉得这种状态效率最高",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "work",
+      "illustration": "bolt.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 26,
+      "text": "每年年初你都会给自己列一整年的目标清单，然后定期回顾进度",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "list.bullet.rectangle.portrait",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 27,
+      "text": "逛街时你更享受漫无目的的闲逛，看到什么有趣就试试，不提前列购物清单",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "bag.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 28,
+      "text": "接到一个新项目，你会先拆解出每个阶段的里程碑节点再开始动手",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "flag.fill",
+      "illustrationType": "sfSymbol"
+    }
+  ]
+}

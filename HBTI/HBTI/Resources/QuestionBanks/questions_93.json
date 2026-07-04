@@ -1,0 +1,843 @@
+{
+  "version": "93题完整版",
+  "description": "全面深度评估，最详尽的人格画像",
+  "questions": [
+    {
+      "id": 1,
+      "text": "电梯门打开，满屋子都是半生不熟的人，你的第一反应是想等下一班",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "social",
+      "illustration": "elevador.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 2,
+      "text": "朋友临时取消约会，你第一件做的事是立刻联系另一个人约新局",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "social",
+      "illustration": "phone.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 3,
+      "text": "刚搬进新宿舍的第一天，你会主动敲隔壁门做自我介绍",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "social",
+      "illustration": "door.open",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 4,
+      "text": "公司年会抽奖中了麦克风，上台即兴发言让你浑身不自在",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "work",
+      "illustration": "mic.slash.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 5,
+      "text": "在咖啡馆写作时旁边坐了个话多的陌生人，你反而聊出了新灵感",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "cup.and.saucer.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 6,
+      "text": "连续三天高强度会议后，你最想做的关掉手机泡一个下午的澡",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "stress",
+      "illustration": "drop.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 7,
+      "text": "你宁愿在微信群里发一段60秒语音来解释一件事，也不爱打字",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "communication",
+      "illustration": "waveform.circle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 8,
+      "text": "收到一条需要紧急处理的消息，你会先打草稿再发出去",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "communication",
+      "illustration": "textformat.abc",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 9,
+      "text": "健身房的陌生人跟你搭讪聊器械，你很自然就加了对方微信",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "social",
+      "illustration": "figure.run",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 10,
+      "text": "家族聚餐上你更愿意帮忙在厨房备菜，也不去客厅跟亲戚寒暄",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "social",
+      "illustration": "cooking.pot.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 11,
+      "text": "一个人逛超市买菜做晚饭的过程，对你来说比聚餐还治愈",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "cart.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 12,
+      "text": "坐飞机旁边的人主动搭话，你觉得这段飞行意外地不无聊",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "airplane.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 13,
+      "text": "开会时你习惯坐在靠墙的角落位，不想引起任何注意",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "work",
+      "illustration": "chair.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 14,
+      "text": "你经常在地铁上跟邻座乘客聊到忘记看手机",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "social",
+      "illustration": "train.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 15,
+      "text": "失恋后你更想拉窗帘窝在被子里待两天，而不是约人出去散心",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "stress",
+      "illustration": "curtains.closed",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 16,
+      "text": "KTV包间里你永远是抢麦克风最积极的那个人",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "music.mic",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 17,
+      "text": "一群人聚餐时你一般不主动讲笑话，但笑得最大声的是你",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "social",
+      "illustration": "face.laughing.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 18,
+      "text": "在公园跑步时碰到晨练的大爷，你能跟人家聊上十分钟天气和养生",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "social",
+      "illustration": "tree.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 19,
+      "text": "被拉进一个五十人的新群，你会把通知关掉，只在必要时冒泡",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "communication",
+      "illustration": "bell.slash.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 20,
+      "text": "加班到深夜同事递来一杯咖啡，这种小互动让你的疲惫一扫而光",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "work",
+      "illustration": "coffee.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 21,
+      "text": "春节走亲戚你提前查好话题防止冷场，但还是觉得身心俱疲",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "stress",
+      "illustration": "calendar.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 22,
+      "text": "在户外市集你跟摊主聊了二十分钟，走的时候加了三个新好友",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "social",
+      "illustration": "storefront.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 23,
+      "text": "你的理想假期是找个没信号的海边小屋住三天不跟任何人说话",
+      "dimension": "EI",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "beach.umbrella.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 24,
+      "text": "周末一个人在家超过半天你就会忍不住刷朋友圈看看谁有空出来",
+      "dimension": "EI",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "rectangle.inset.filled.and.person.3.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 25,
+      "text": "逛博物馆时你更爱仔细读每件展品的铭牌说明和材质介绍",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "building.columns.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 26,
+      "text": "站在博物馆里你会忍不住脑补这些文物背后的人间故事",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "paintpalette.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 27,
+      "text": "看菜谱时你会严格按克数和步骤来，稍有偏差就会担心翻车",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "learning",
+      "illustration": "scalemass.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 28,
+      "text": "做菜你更爱随手加料凭感觉创造新口味，翻车也无所谓",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "flame.circle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 29,
+      "text": "老板让你做季度报表，你第一反应是打开Excel整理历史数据",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "work",
+      "illustration": "tablecells.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 30,
+      "text": "老板让你做季度报表，你先花十分钟在白板上画趋势方向图",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "work",
+      "illustration": "chart.xyaxis.line",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 31,
+      "text": "搬家打包行李你会按房间分类编号，每箱贴好标签",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "planning",
+      "illustration": "tag.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 32,
+      "text": "搬家时你更想的是新家可以怎么重新布置出一个全新的风格",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "paintbrush.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 33,
+      "text": "买新手机你更看重电池容量和处理器跑分这些硬参数",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "decision",
+      "illustration": "battery.100percent",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 34,
+      "text": "买新手机你更在意这个品牌传递的生活方式和设计理念",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "decision",
+      "illustration": "sparkle.rectangle.stack",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 35,
+      "text": "学游泳你更依赖教练手把手教你分解动作，一步步照做",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "learning",
+      "illustration": "figure.pool.swim",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 36,
+      "text": "学游泳你更喜欢自己泡在水里反复试，找到自己的节奏",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "learning",
+      "illustration": "water.waves",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 37,
+      "text": "看完电影你会记住演员的名字和票房成绩，并且能跟人比一比",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "film.stack.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 38,
+      "text": "看完电影你会花一整晚分析导演的叙事手法和隐喻符号",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "clapperboard.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 39,
+      "text": "出门时你会把手机钥匙钱包卡按固定口袋放好，一模一样",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "planning",
+      "illustration": "wallet.pass.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 40,
+      "text": "出门前你边穿鞋边幻想今天路上可能发生的各种有趣偶遇",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "shoeprints.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 41,
+      "text": "选餐厅你更相信大众点评的评分和真实用户晒图",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "decision",
+      "illustration": "star.leadinghalf.filled",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 42,
+      "text": "选餐厅你更相信自己的直觉和门面氛围给人的感觉",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "decision",
+      "illustration": "heart.circle",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 43,
+      "text": "跟朋友讲最近发生的事你习惯精确描述时间地点和细节",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "communication",
+      "illustration": "pin.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 44,
+      "text": "跟朋友讲故事你经常绕来绕去加入各种想象和夸张桥段",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "communication",
+      "illustration": "quote.bubble.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 45,
+      "text": "给你一份产品说明书你会从头到尾逐字逐句读一遍再操作",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "learning",
+      "illustration": "book.closed.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 46,
+      "text": "新买的电器你从不看说明书，直接上手摸索怎么用",
+      "dimension": "SN",
+      "direction": "right",
+      "category": "learning",
+      "illustration": "gearshape.2",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 47,
+      "text": "装修房子时你最先确定的是瓷砖颜色和地板材质的实物小样",
+      "dimension": "SN",
+      "direction": "left",
+      "category": "planning",
+      "illustration": "square.stack.3d.up.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 48,
+      "text": "收到同事哭诉被领导骂的消息，你第一反应是帮他想解决方案",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "communication",
+      "illustration": "lightbulb.min.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 49,
+      "text": "收到同事哭诉被领导骂的消息，你先回一串抱抱表情再慢慢聊",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "communication",
+      "illustration": "heart.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 50,
+      "text": "团队有人犯了大错，你认为该当众指出问题而不是顾及面子",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "work",
+      "illustration": "exclamationmark.triangle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 51,
+      "text": "团队有人犯了大错，你会先私下跟他说帮他挽回影响再谈改进",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "work",
+      "illustration": "hand.point.up.left.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 52,
+      "text": "分配任务时你觉得能力优先，不应该因为关系好就分轻松的活",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "work",
+      "illustration": "equal.circle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 53,
+      "text": "分配任务时你会考虑每个人的身体状态和情绪，适当做调整",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "work",
+      "illustration": "heart.circle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 54,
+      "text": "朋友分手后来找你，你帮他理性分析这段感情的问题在哪里",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "decision",
+      "illustration": "list.dash.header.rectangle",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 55,
+      "text": "朋友分手后来找你，你陪他喝酒吃烧烤听他哭一整晚",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "social",
+      "illustration": "wineglass.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 56,
+      "text": "看到网上有人发错误的科普贴，你忍不住写了一大段纠正评论",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "communication",
+      "illustration": "text.badge.xmark",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 57,
+      "text": "看到网上有人分享脆弱经历，你的评论区永远是温暖鼓励的话",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "communication",
+      "illustration": "hands.clap.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 58,
+      "text": "面试候选人时你更关注对方的专业能力和项目经验",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "work",
+      "illustration": "person.text.rectangle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 59,
+      "text": "面试候选人时你更在意对方的眼神和语气传递出的真诚程度",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "work",
+      "illustration": "eye.circle",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 60,
+      "text": "公交车让座你觉得这是义务，不需要感动自己或者发朋友圈",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "decision",
+      "illustration": "figure.seated",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 61,
+      "text": "看到街边卖花的老奶奶你会买一束不是需要而是心疼",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "decision",
+      "illustration": "leaf.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 62,
+      "text": "跟伴侣吵架你更想冷静坐下来逐条讲道理",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "stress",
+      "illustration": "bubble.left.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 63,
+      "text": "跟伴侣吵架你需要先被抱一下情绪才能慢慢平复",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "stress",
+      "illustration": "heart.circle",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 64,
+      "text": "做小组作业你主张按每人贡献度严格打分，不搞人情分",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "learning",
+      "illustration": "percent.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 65,
+      "text": "做小组作业你觉得最后给每个人都写好评语才不会伤感情",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "learning",
+      "illustration": "hand.thumbsup.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 66,
+      "text": "网购退货时你觉得规定就是规定，不会因为客服态度好就心软",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "decision",
+      "illustration": "doc.text.magnifyingglass",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 67,
+      "text": "接到推销电话你很难直接挂断，总觉得对方也是打工不容易",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "communication",
+      "illustration": "phone.badge.plus.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 68,
+      "text": "小组讨论时你会直接指出方案漏洞，不会因为面子绕弯子",
+      "dimension": "TF",
+      "direction": "right",
+      "category": "work",
+      "illustration": "arrow.uturn.down.circle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 69,
+      "text": "路边的流浪猫受伤了你会停下脚步蹲下来想办法送它去医院",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "decision",
+      "illustration": "pawprint.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 70,
+      "text": "看到孩子在大厅哭闹，你第一反应是心疼而不是嫌吵",
+      "dimension": "TF",
+      "direction": "left",
+      "category": "social",
+      "illustration": "figure.child.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 71,
+      "text": "每月工资一到账你就把固定比例转入储蓄和投资账户",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "dollarsign.circle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 72,
+      "text": "月初刚领的工资到月底不剩多少了，但这个月过得特别开心",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "planning",
+      "illustration": "banknote.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 73,
+      "text": "旅行前两周你已经把每天几点起床吃什么玩什么排得满满当当",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "list.clipboard.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 74,
+      "text": "落地后你走到哪算哪，被当地人说的小众景点吸引就临时改路线",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "signpost.right.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 75,
+      "text": "你的衣柜按颜色和季节分区，衣服叠得整整齐齐像优衣库货架",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "wardrobe.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 76,
+      "text": "你的衣服分挂在椅背、门把手和沙发上，但你知道每件在哪",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "planning",
+      "illustration": "tshirt.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 77,
+      "text": "写论文你会先列完整的目录大纲再逐章推进，不允许自己跑题",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "learning",
+      "illustration": "doc.text.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 78,
+      "text": "写论文你最常用的策略是先想到哪写到哪，最后再统一整理",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "learning",
+      "illustration": "pencil.and.outline",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 79,
+      "text": "早上闹钟响第三次你已经洗漱完毕坐在餐桌前了",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "alarm.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 80,
+      "text": "早上闹钟响了你能按掉继续睡然后靠最后的五分钟冲出门",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "planning",
+      "illustration": "zzz.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 81,
+      "text": "周五下班后你的周末计划已经排到了周日晚上",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "calendar.circle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 82,
+      "text": "周五下班你只想放空不想定计划，到周六再想明天干嘛",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "couch.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 83,
+      "text": "项目启动前你坚持必须先定好里程碑时间表再动工",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "work",
+      "illustration": "timeline.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 84,
+      "text": "项目启动你觉得先把大方向试出来比定死进度条更重要",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "work",
+      "illustration": "scope",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 85,
+      "text": "你的手机桌面按功能分好了文件夹，最常用的App在第一屏",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "planning",
+      "illustration": "square.grid.2x2",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 86,
+      "text": "你经常翻遍六个屏幕才找到某个App，但你懒得整理觉得能用就行",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "planning",
+      "illustration": "app.badge.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 87,
+      "text": "约会你最怕对方说随便，你更希望提前商量好时间地点和备选方案",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "social",
+      "illustration": "heart.text.rectangle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 88,
+      "text": "约会你最怕对方定得太死，你更想走一步看一步保持新鲜感",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "social",
+      "illustration": "confetti.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 89,
+      "text": "考试前一周你就制定了每天复习多少页的精确计划表",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "learning",
+      "illustration": "checkmark.calendar",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 90,
+      "text": "考试前一天晚上你才开始疯狂翻书，肾上腺素让你效率奇高",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "learning",
+      "illustration": "bolt.heart.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 91,
+      "text": "看剧你更偏爱一季全集上线后按计划每天追两集慢慢品",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "leisure",
+      "illustration": "play.circle.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 92,
+      "text": "追新剧你一旦上头就会不眠不休刷完全季然后废掉三天",
+      "dimension": "JP",
+      "direction": "left",
+      "category": "leisure",
+      "illustration": "tv.fill",
+      "illustrationType": "sfSymbol"
+    },
+    {
+      "id": 93,
+      "text": "做年终总结时你提前把每个季度的数据和成果整理成清晰的图表",
+      "dimension": "JP",
+      "direction": "right",
+      "category": "work",
+      "illustration": "chart.bar.doc.horizontal.fill",
+      "illustrationType": "sfSymbol"
+    }
+  ]
+}
