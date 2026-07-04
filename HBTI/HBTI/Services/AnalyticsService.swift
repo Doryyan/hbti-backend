@@ -16,7 +16,7 @@ final class AnalyticsService {
         if let configuredURL = UserDefaults.standard.string(forKey: "hbti_server_url") {
             self.baseURL = configuredURL
         } else {
-            self.baseURL = "http://localhost:3000/api"
+            self.baseURL = "https://hbti-api.onrender.com/api"
         }
         
         // 生成稳定的匿名设备标识（非IDFA，非广告标识符）
