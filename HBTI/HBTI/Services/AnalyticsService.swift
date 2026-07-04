@@ -1,3 +1,4 @@
+import UIKit
 import Foundation
 
 /// 匿名化测试数据上传服务

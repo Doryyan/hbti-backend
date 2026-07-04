@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HBTI 16型人格测试 - 效果预览</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f5f5f7;
+  padding: 20px;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+h1 { text-align: center; margin-bottom: 8px; color: #1d1d1f; }
+.subtitle { text-align: center; color: #86868b; margin-bottom: 30px; }
+.phone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+.phone {
+  width: 280px;
+  height: 580px;
+  background: #000;
+  border-radius: 40px;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.screen {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #F8F5FF 0%, #F0FFF4 100%);
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+}
+.screen-header {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 120px; height: 30px;
+  background: #000;
+  border-radius: 0 0 16px 16px;
+  z-index: 10;
+}
+.label {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+/* Welcome Screen */
+.welcome-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+.logo-circle {
+  width: 90px; height: 90px;
+  background: linear-gradient(135deg, #7B68EE, #3CB371);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 24px rgba(123,104,238,0.3);
+}
+.logo-circle span { font-size: 40px; font-weight: bold; color: white; }
+.brand-text { font-size: 28px; font-weight: bold; background: linear-gradient(135deg, #7B68EE, #3CB371); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.brand-sub { font-size: 15px; color: #333; margin: 4px 0; }
+.brand-desc { font-size: 11px; color: #86868b; text-align: center; }
+.input-box {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 16px 0 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.input-label { font-size: 11px; font-weight: 600; color: #333; margin-bottom: 6px; }
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+}
+.version-card {
+  width: 100%;
+  background: white;
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 2px solid #7B68EE;
+}
+.version-card.unselected { border-color: rgba(0,0,0,0.08); }
+.vc-header { display: flex; align-items: center; gap: 10px; }
+.vc-icon-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 44px; flex-shrink: 0; }
+.vc-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.vc-icon.green { background: rgba(52,199,89,0.12); color: #34C759; }
+.vc-icon.orange { background: rgba(255,149,0,0.12); color: #FF9500; }
+.vc-icon.purple { background: rgba(123,104,238,0.12); color: #7B68EE; }
+.vc-icon-price { font-size: 11px; font-weight: 700; }
+.vc-icon-price.free { color: #34C759; }
+.vc-icon-price.orange { color: #FF9500; }
+.vc-icon-price.purple { color: #7B68EE; }
+.vc-name { font-size: 16px; font-weight: 700; color: #1d1d1f; white-space: nowrap; }
+.vc-tagline {
+  font-size: 12px; color: #86868b;
+  margin: 0 0 0 54px;
+}
+.vc-check { font-size: 22px; color: #7B68EE; flex-shrink: 0; }
+.vc-divider { height: 1px; background: rgba(123,104,238,0.12); margin: 10px 0; }
+.vc-features { list-style: none; padding: 0; }
+.vc-features li {
+  font-size: 11px; color: #333; padding: 3px 0;
+  display: flex; align-items: flex-start; gap: 6px;
+}
+.vc-features li::before { content: "✓"; color: #34C759; font-weight: bold; font-size: 10px; flex-shrink: 0; margin-top: 2px; }
+.vc-features.orange li::before { color: #FF9500; }
+.vc-features.purple li::before { color: #7B68EE; }
+.vc-meta { margin-top: 8px; padding-top: 8px; border-top: 1px solid #f0f0f0; }
+.vc-meta-row { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #86868b; margin-bottom: 3px; }
+.start-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #7B68EE, #3CB371);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 8px;
+  box-shadow: 0 6px 20px rgba(123,104,238,0.3);
+}
+.terms-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 10px;
+  color: #86868b;
+}
+.terms-row input { margin-top: 2px; }
+.terms-row a { color: #7B68EE; text-decoration: none; }
+
+/* Quiz Screen */
+.quiz-header {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.quiz-user { font-size: 13px; font-weight: 600; }
+.quiz-version { font-size: 10px; color: #86868b; }
+.quiz-progress-pill {
+  background: rgba(123,104,238,0.1);
+  color: #7B68EE;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.progress-bar-bg {
+  height: 6px;
+  background: rgba(0,0,0,0.08);
+  margin: 0 16px;
+  border-radius: 3px;
+  margin-top: 8px;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7B68EE, #3CB371);
+  border-radius: 3px;
+}
+.illus-image {
+  width: 100%;
+  height: 140px;
+  border-radius: 16px;
+  object-fit: cover;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(123,104,238,0.15);
+}
+.question-card {
+  background: white;
+  margin: 16px;
+  border-radius: 24px;
+  padding: 20px 20px 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100% - 120px);
+  overflow-y: auto;
+}
+.question-text {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  color: #1d1d1f;
+  line-height: 1.5;
+  margin-bottom: auto;
+}
+.slider-container {
+  width: 100%;
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.slider-track {
+  height: 10px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 5px;
+  position: relative;
+  margin: 12px 0 0;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
+}
+.slider-fill {
+  position: absolute;
+  left: 0; top: 0;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(123,104,238,0.15), rgba(123,104,238,0.6), #7B68EE);
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(123,104,238,0.2);
+}
+.slider-thumb {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px; height: 36px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(123,104,238,0.15), 0 4px 12px rgba(123,104,238,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: bold;
+  color: #7B68EE;
+  z-index: 5;
+}
+.slider-divider {
+  position: absolute;
+  top: 3px;
+  width: 1px;
+  height: 4px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 1px;
+}
+.stops-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+.slider-stop {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(123,104,238,0.2);
+  background: rgba(123,104,238,0.12);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slider-stop::after {
+  content: '';
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: rgba(123,104,238,0.2);
+}
+.slider-stop.active {
+  width: 16px; height: 16px;
+  border-color: #7B68EE;
+  border-width: 2px;
+  background: rgba(123,104,238,0.12);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.slider-stop.active::after {
+  width: 6px; height: 6px;
+  background: #7B68EE;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(123,104,238,0.15); }
+  50% { box-shadow: 0 0 0 6px rgba(123,104,238,0); }
+}
+.labels-row {
+  position: relative;
+  height: 20px;
+  margin: 4px 0;
+}
+.labels-row span {
+  position: absolute;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+}
+.labels-row .label-short {
+  font-size: 9px;
+  color: rgba(0,0,0,0.35);
+  font-weight: 600;
+}
+.labels-row .label-short.active { color: #7B68EE; }
+.labels-row span:nth-child(1) { left: 0%; }
+.labels-row span:nth-child(2) { left: 25%; }
+.labels-row span:nth-child(3) { left: 50%; }
+.labels-row span:nth-child(4) { left: 75%; }
+.labels-row span:nth-child(5) { left: 100%; }
+.slider-endpoints {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  margin-top: 6px;
+}
+.slider-endpoints span:first-child, .slider-endpoints span:last-child { font-weight: 600; color: #7B68EE; }
+.current-level {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #7B68EE;
+  margin-top: 10px;
+}
+.next-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #7B68EE, #3CB371);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 12px;
+  box-shadow: 0 6px 20px rgba(123,104,238,0.3);
+}
+
+/* Result Screen */
+.result-bg { background: linear-gradient(180deg, #F8F5FF 0%, #F0FFF4 100%); }
+.result-hero {
+  background: white;
+  margin: 16px;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  text-align: center;
+}
+.type-code {
+  font-size: 48px;
+  font-weight: bold;
+  color: #7B68EE;
+  letter-spacing: 4px;
+}
+.type-name {
+  font-size: 20px;
+  font-weight: 500;
+  color: #7B68EE;
+  margin: 4px 0;
+}
+.type-group {
+  display: inline-block;
+  background: rgba(123,104,238,0.12);
+  color: #7B68EE;
+  padding: 4px 14px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 8px 0;
+}
+.type-desc {
+  font-size: 13px;
+  color: #86868b;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+.dimension-card {
+  background: white;
+  margin: 0 16px 12px;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.dim-title { font-size: 14px; font-weight: bold; color: #333; margin-bottom: 12px; }
+.dim-row { margin-bottom: 12px; }
+.dim-header { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; }
+.dim-header span:first-child { font-weight: 600; color: #7B68EE; }
+.dim-bar-bg { height: 16px; background: rgba(0,0,0,0.08); border-radius: 8px; overflow: hidden; }
+.dim-bar-fill { height: 100%; background: linear-gradient(90deg, rgba(123,104,238,0.4), #7B68EE); border-radius: 8px; }
+.dim-percents { display: flex; justify-content: space-between; font-size: 10px; color: #86868b; margin-top: 2px; }
+.action-btns { padding: 0 16px; }
+.unlock-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #FF9500, #FF3B30);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(255,149,0,0.3);
+}
+.share-btn {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: #7B68EE;
+  border: 1px solid rgba(123,104,238,0.3);
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* Dimension color variants */
+.dim-ei .slider-fill { background: linear-gradient(90deg, rgba(123,104,238,0.15), rgba(123,104,238,0.6), #7B68EE); }
+.dim-ei .slider-thumb, .dim-ei .slider-stop.active::after { color: #7B68EE; }
+.dim-ei .slider-stop.active { border-color: #7B68EE; }
+.dim-sn .slider-fill { background: linear-gradient(90deg, rgba(0,191,165,0.15), rgba(0,191,165,0.6), #00BFA5); }
+.dim-sn .slider-thumb, .dim-sn .slider-stop.active::after { color: #00BFA5; }
+.dim-sn .slider-stop.active { border-color: #00BFA5; }
+.dim-sn .slider-endpoints span { color: #00BFA5; }
+.dim-tf .slider-fill { background: linear-gradient(90deg, rgba(255,107,129,0.15), rgba(255,107,129,0.6), #FF6B81); }
+.dim-tf .slider-thumb, .dim-tf .slider-stop.active::after { color: #FF6B81; }
+.dim-tf .slider-stop.active { border-color: #FF6B81; }
+.dim-tf .slider-endpoints span { color: #FF6B81; }
+.dim-jp .slider-fill { background: linear-gradient(90deg, rgba(52,199,89,0.15), rgba(52,199,89,0.6), #34C759); }
+.dim-jp .slider-thumb, .dim-jp .slider-stop.active::after { color: #34C759; }
+.dim-jp .slider-stop.active { border-color: #34C759; }
+.dim-jp .slider-endpoints span { color: #34C759; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>HBTI 16型人格测试</h1>
+  <p class="subtitle">iOS App 界面效果预览 — 每道题配有专属情境插图</p>
+
+  <div class="phone-grid">
+    <!-- 欢迎页 -->
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="screen-header"></div>
+          <div class="welcome-content">
+            <div style="margin-top:20px;"></div>
+            <div class="logo-circle"><span>H</span></div>
+            <div class="brand-text">HBTI</div>
+            <div class="brand-sub">16型人格测试</div>
+            <div class="brand-desc">探索你的性格类型，发现真实的自己</div>
+
+            <div class="input-box">
+              <div class="input-label">你的名字</div>
+              <div class="input-field" style="color:#86868b;">请输入你的名字</div>
+            </div>
+
+            <div style="font-size:12px;font-weight:600;color:#333;width:100%;margin-bottom:6px;">选择测试版本</div>
+
+            <div class="version-card">
+              <div class="vc-header">
+                <div class="vc-icon-wrap">
+                  <div class="vc-icon green">&#9889;</div>
+                  <div class="vc-icon-price free">免费</div>
+                </div>
+                <div class="vc-name">28题简版</div>
+                <div class="vc-check">&#10003;</div>
+              </div>
+              <div class="vc-tagline">快速初探，了解你的性格轮廓</div>
+              <div class="vc-divider"></div>
+              <ul class="vc-features">
+                <li>28道精选题目，约3分钟完成</li>
+                <li>四大维度基础评估</li>
+                <li>自动生成人格类型结果</li>
+                <li>免费查看基础分析报告</li>
+                <li>支持社交分享卡片</li>
+              </ul>
+              <div class="vc-meta">
+                <div class="vc-meta-row">&#128100; 适合首次体验、快速了解性格类型的人群</div>
+                <div class="vc-meta-row">&#128196; 基础报告 — 免费</div>
+              </div>
+            </div>
+
+            <div class="version-card unselected">
+              <div class="vc-header">
+                <div class="vc-icon-wrap">
+                  <div class="vc-icon orange">&#9733;</div>
+                  <div class="vc-icon-price">¥9.9</div>
+                </div>
+                <div class="vc-name">48题通用版</div>
+                <div style="width:22px;height:22px;border:2px solid #ccc;border-radius:50%;flex-shrink:0;"></div>
+              </div>
+              <div class="vc-tagline">标准评估，获得有深度的性格解读</div>
+              <div class="vc-divider"></div>
+              <ul class="vc-features orange">
+                <li>48道原创题目，约5分钟完成</li>
+                <li>每个维度覆盖12种场景</li>
+                <li>更精准的维度百分比计算</li>
+                <li>包含职业推荐与发展建议</li>
+                <li>解锁完整详细分析报告</li>
+              </ul>
+              <div class="vc-meta">
+                <div class="vc-meta-row">&#128100; 适合想要深入了解自己、需要职业或成长参考的人群</div>
+                <div class="vc-meta-row">&#128196; 基础免费 · 详细报告 ¥9.9</div>
+              </div>
+            </div>
+
+            <div class="version-card unselected">
+              <div class="vc-header">
+                <div class="vc-icon-wrap">
+                  <div class="vc-icon purple">&#128081;</div>
+                  <div class="vc-icon-price purple">¥29.9</div>
+                </div>
+                <div class="vc-name">93题完整版</div>
+                <div style="width:22px;height:22px;border:2px solid #ccc;border-radius:50%;flex-shrink:0;"></div>
+              </div>
+              <div class="vc-tagline">全面深度评估，最详尽的人格画像</div>
+              <div class="vc-divider"></div>
+              <ul class="vc-features purple">
+                <li>93道完整题库，约10分钟完成</li>
+                <li>每个维度覆盖23种生活场景</li>
+                <li>最高精度的类型判定</li>
+                <li>全维度深度解析 + 职业规划</li>
+                <li>人际关系 + 压力管理 + 兼容性分析</li>
+                <li>支持导出精美PDF报告</li>
+              </ul>
+              <div class="vc-meta">
+                <div class="vc-meta-row">&#128100; 适合追求深度自我认知、需要全面分析报告的人群</div>
+                <div class="vc-meta-row">&#128196; 基础免费 · 详细报告 ¥29.9</div>
+              </div>
+            </div>
+
+            <button class="start-btn">开始测试</button>
+
+            <div class="terms-row">
+              <input type="checkbox" checked>
+              <span>我已阅读并同意 <a href="#">《服务条款》</a> 和 <a href="#">《隐私政策》</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="label">欢迎页</div>
+    </div>
+
+    <!-- 答题页1: EI - 内向独处阅读 -->
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="screen-header"></div>
+          <div class="quiz-header">
+            <div>
+              <div class="quiz-user">小明</div>
+              <div class="quiz-version">28题简版</div>
+            </div>
+            <div class="quiz-progress-pill">第 1/28 题</div>
+          </div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:3.5%"></div></div>
+
+          <div class="question-card">
+              <img src="HBTI/HBTI/Resources/Illustrations/illust_ei_left_reading.jpg" class="illus-image" onerror="this.style.display='none'">
+              <div class="question-text">团建晚宴散场后，你第一反应是想赶紧回家窝沙发上回血，还是拉几个人再去喝一杯</div>
+
+            <div style="width:100%;">
+              <div class="slider-container">
+                <div class="slider-track">
+                  <div class="slider-fill" style="width:25%"></div>
+                  <div class="slider-divider" style="left:0%"></div>
+                  <div class="slider-divider" style="left:25%"></div>
+                  <div class="slider-divider" style="left:50%"></div>
+                  <div class="slider-divider" style="left:75%"></div>
+                  <div class="slider-divider" style="left:100%"></div>
+                  <div class="slider-thumb" style="left:25%">2</div>
+                </div>
+                <div class="stops-row">
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop active"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                </div>
+                <div class="labels-row">
+                  <span style="left:0%"><div class="label-short">非常不符</div></span>
+                  <span style="left:25%"><div class="label-short active">不太符</div></span>
+                  <span style="left:50%"><div class="label-short">一般</div></span>
+                  <span style="left:75%"><div class="label-short">比较符</div></span>
+                  <span style="left:100%"><div class="label-short">非常符</div></span>
+                </div>
+                <div class="slider-endpoints">
+                  <span>&#9650; 内向</span>
+                  <span>外向 &#9650;</span>
+                </div>
+                <div class="current-level">不太符</div>
+              </div>
+              <button class="next-btn">下一题 &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="label">答题 — EI 内向阅读</div>
+    </div>
+
+    <!-- 答题页2: EI - 外向社交聚会 -->
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="screen-header"></div>
+          <div class="quiz-header">
+            <div>
+              <div class="quiz-user">小明</div>
+              <div class="quiz-version">28题简版</div>
+            </div>
+            <div class="quiz-progress-pill">第 2/28 题</div>
+          </div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:7%"></div></div>
+
+          <div class="question-card">
+              <img src="HBTI/HBTI/Resources/Illustrations/illust_ei_right_party.jpg" class="illus-image" onerror="this.style.display='none'">
+              <div class="question-text">搬进新小区第一周，你已经和邻居们聊熟了，还加了几个人的微信</div>
+
+            <div style="width:100%;">
+              <div class="slider-container">
+                <div class="slider-track">
+                  <div class="slider-fill" style="width:75%"></div>
+                  <div class="slider-divider" style="left:0%"></div>
+                  <div class="slider-divider" style="left:25%"></div>
+                  <div class="slider-divider" style="left:50%"></div>
+                  <div class="slider-divider" style="left:75%"></div>
+                  <div class="slider-divider" style="left:100%"></div>
+                  <div class="slider-thumb" style="left:75%">4</div>
+                </div>
+                <div class="stops-row">
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop active"></div>
+                  <div class="slider-stop"></div>
+                </div>
+                <div class="labels-row">
+                  <span style="left:0%"><div class="label-short">非常不符</div></span>
+                  <span style="left:25%"><div class="label-short">不太符</div></span>
+                  <span style="left:50%"><div class="label-short">一般</div></span>
+                  <span style="left:75%"><div class="label-short active">比较符</div></span>
+                  <span style="left:100%"><div class="label-short">非常符</div></span>
+                </div>
+                <div class="slider-endpoints">
+                  <span>&#9650; 内向</span>
+                  <span>外向 &#9650;</span>
+                </div>
+                <div class="current-level">比较符</div>
+              </div>
+              <button class="next-btn">下一题 &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="label">答题 — EI 外向社交</div>
+    </div>
+
+    <!-- 答题页3: SN - 直觉想象力 -->
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="screen-header"></div>
+          <div class="quiz-header">
+            <div>
+              <div class="quiz-user">小明</div>
+              <div class="quiz-version">28题简版</div>
+            </div>
+            <div class="quiz-progress-pill">第 9/28 题</div>
+          </div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:32%"></div></div>
+
+          <div class="question-card">
+              <img src="HBTI/HBTI/Resources/Illustrations/illust_sn_right_imagine.jpg" class="illus-image" onerror="this.style.display='none'">
+              <div class="question-text">看到一个旧物的瞬间，你脑中突然冒出它背后的故事和无数种可能的用途</div>
+
+            <div style="width:100%;">
+              <div class="slider-container dim-sn">
+                <div class="slider-track">
+                  <div class="slider-fill" style="width:100%"></div>
+                  <div class="slider-divider" style="left:0%"></div>
+                  <div class="slider-divider" style="left:25%"></div>
+                  <div class="slider-divider" style="left:50%"></div>
+                  <div class="slider-divider" style="left:75%"></div>
+                  <div class="slider-divider" style="left:100%"></div>
+                  <div class="slider-thumb" style="left:100%">5</div>
+                </div>
+                <div class="stops-row">
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop active"></div>
+                </div>
+                <div class="labels-row">
+                  <span style="left:0%"><div class="label-short">非常不符</div></span>
+                  <span style="left:25%"><div class="label-short">不太符</div></span>
+                  <span style="left:50%"><div class="label-short">一般</div></span>
+                  <span style="left:75%"><div class="label-short">比较符</div></span>
+                  <span style="left:100%"><div class="label-short active">非常符</div></span>
+                </div>
+                <div class="slider-endpoints">
+                  <span>&#9650; 实感</span>
+                  <span>直觉 &#9650;</span>
+                </div>
+                <div class="current-level">非常符</div>
+              </div>
+              <button class="next-btn">下一题 &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="label">答题 — SN 直觉想象</div>
+    </div>
+
+    <!-- 答题页4: TF - 情感关心他人 -->
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="screen-header"></div>
+          <div class="quiz-header">
+            <div>
+              <div class="quiz-user">小明</div>
+              <div class="quiz-version">28题简版</div>
+            </div>
+            <div class="quiz-progress-pill">第 16/28 题</div>
+          </div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:57%"></div></div>
+
+          <div class="question-card">
+              <img src="HBTI/HBTI/Resources/Illustrations/illust_tf_left_care.jpg" class="illus-image" onerror="this.style.display='none'">
+              <div class="question-text">看到朋友发了一条伤感的动态，你会先放下手头的事去关心对方的情况</div>
+
+            <div style="width:100%;">
+              <div class="slider-container dim-tf">
+                <div class="slider-track">
+                  <div class="slider-fill" style="width:75%"></div>
+                  <div class="slider-divider" style="left:0%"></div>
+                  <div class="slider-divider" style="left:25%"></div>
+                  <div class="slider-divider" style="left:50%"></div>
+                  <div class="slider-divider" style="left:75%"></div>
+                  <div class="slider-divider" style="left:100%"></div>
+                  <div class="slider-thumb" style="left:75%">4</div>
+                </div>
+                <div class="stops-row">
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop active"></div>
+                  <div class="slider-stop"></div>
+                </div>
+                <div class="labels-row">
+                  <span style="left:0%"><div class="label-short">非常不符</div></span>
+                  <span style="left:25%"><div class="label-short">不太符</div></span>
+                  <span style="left:50%"><div class="label-short">一般</div></span>
+                  <span style="left:75%"><div class="label-short active">比较符</div></span>
+                  <span style="left:100%"><div class="label-short">非常符</div></span>
+                </div>
+                <div class="slider-endpoints">
+                  <span>&#9650; 思考</span>
+                  <span>情感 &#9650;</span>
+                </div>
+                <div class="current-level">比较符</div>
+              </div>
+              <button class="next-btn">下一题 &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="label">答题 — TF 情感关怀</div>
+    </div>
+
+    <!-- 答题页5: JP - 计划型 -->
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="screen-header"></div>
+          <div class="quiz-header">
+            <div>
+              <div class="quiz-user">小明</div>
+              <div class="quiz-version">28题简版</div>
+            </div>
+            <div class="quiz-progress-pill">第 21/28 题</div>
+          </div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:75%"></div></div>
+
+          <div class="question-card">
+              <img src="HBTI/HBTI/Resources/Illustrations/illust_jp_right_plan.jpg" class="illus-image" onerror="this.style.display='none'">
+              <div class="question-text">收到周末活动的邀请，你会先确认具体时间地点和流程再决定去不去</div>
+
+            <div style="width:100%;">
+              <div class="slider-container dim-jp">
+                <div class="slider-track">
+                  <div class="slider-fill" style="width:100%"></div>
+                  <div class="slider-divider" style="left:0%"></div>
+                  <div class="slider-divider" style="left:25%"></div>
+                  <div class="slider-divider" style="left:50%"></div>
+                  <div class="slider-divider" style="left:75%"></div>
+                  <div class="slider-divider" style="left:100%"></div>
+                  <div class="slider-thumb" style="left:100%">5</div>
+                </div>
+                <div class="stops-row">
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop active"></div>
+                </div>
+                <div class="labels-row">
+                  <span style="left:0%"><div class="label-short">非常不符</div></span>
+                  <span style="left:25%"><div class="label-short">不太符</div></span>
+                  <span style="left:50%"><div class="label-short">一般</div></span>
+                  <span style="left:75%"><div class="label-short">比较符</div></span>
+                  <span style="left:100%"><div class="label-short active">非常符</div></span>
+                </div>
+                <div class="slider-endpoints">
+                  <span>&#9650; 知觉</span>
+                  <span>判断 &#9650;</span>
+                </div>
+                <div class="current-level">非常符</div>
+              </div>
+              <button class="next-btn">下一题 &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="label">答题 — JP 计划执行</div>
+    </div>
+
+    <!-- 答题页6: JP - 灵活型 -->
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="screen-header"></div>
+          <div class="quiz-header">
+            <div>
+              <div class="quiz-user">小明</div>
+              <div class="quiz-version">28题简版</div>
+            </div>
+            <div class="quiz-progress-pill">第 22/28 题</div>
+          </div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:78%"></div></div>
+
+          <div class="question-card">
+              <img src="HBTI/HBTI/Resources/Illustrations/illust_jp_left_flexible.jpg" class="illus-image" onerror="this.style.display='none'">
+              <div class="question-text">出门旅行你更爱走到哪算哪，发现有趣的小巷就拐进去看看，走错路也不慌</div>
+
+            <div style="width:100%;">
+              <div class="slider-container dim-jp">
+                <div class="slider-track">
+                  <div class="slider-fill" style="width:50%"></div>
+                  <div class="slider-divider" style="left:0%"></div>
+                  <div class="slider-divider" style="left:25%"></div>
+                  <div class="slider-divider" style="left:50%"></div>
+                  <div class="slider-divider" style="left:75%"></div>
+                  <div class="slider-divider" style="left:100%"></div>
+                  <div class="slider-thumb" style="left:50%">3</div>
+                </div>
+                <div class="stops-row">
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop active"></div>
+                  <div class="slider-stop"></div>
+                  <div class="slider-stop"></div>
+                </div>
+                <div class="labels-row">
+                  <span style="left:0%"><div class="label-short">非常不符</div></span>
+                  <span style="left:25%"><div class="label-short">不太符</div></span>
+                  <span style="left:50%"><div class="label-short active">一般</div></span>
+                  <span style="left:75%"><div class="label-short">比较符</div></span>
+                  <span style="left:100%"><div class="label-short">非常符</div></span>
+                </div>
+                <div class="slider-endpoints">
+                  <span>&#9650; 知觉</span>
+                  <span>判断 &#9650;</span>
+                </div>
+                <div class="current-level">一般</div>
+              </div>
+              <button class="next-btn">下一题 &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="label">答题 — JP 灵活应变</div>
+    </div>
+
+    <!-- 结果页 -->
+    <div>
+      <div class="phone">
+        <div class="screen result-bg">
+          <div class="screen-header"></div>
+          <div style="padding-top:30px;"></div>
+
+          <div class="result-hero">
+            <div class="type-code">ENFP</div>
+            <div class="type-name">— 竞选者 —</div>
+            <div class="type-group">&#9733; 外交家</div>
+            <div class="type-desc">热情、有创造力、爱社交的自由精神，总能找到微笑的理由。</div>
+          </div>
+
+          <div class="dimension-card">
+            <div class="dim-title">四维解析</div>
+            <div class="dim-row">
+              <div class="dim-header"><span>外向 78%</span><span>内向 22%</span></div>
+              <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:78%"></div></div>
+            </div>
+            <div class="dim-row">
+              <div class="dim-header"><span>直觉 65%</span><span>感觉 35%</span></div>
+              <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:65%"></div></div>
+            </div>
+            <div class="dim-row">
+              <div class="dim-header"><span>情感 72%</span><span>思考 28%</span></div>
+              <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:72%"></div></div>
+            </div>
+            <div class="dim-row">
+              <div class="dim-header"><span>知觉 58%</span><span>判断 42%</span></div>
+              <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:58%"></div></div>
+            </div>
+          </div>
+
+          <div class="dimension-card" style="margin-top:12px;">
+            <div class="dim-title">核心优势</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+              <div style="background:rgba(52,199,89,0.08);border-radius:10px;padding:10px;font-size:11px;color:#2d6a4f;line-height:1.5;">
+                <div style="font-weight:700;color:#34C759;margin-bottom:4px;">&#10003; 优势</div>
+                充满热情与感染力<br>富有创造力和想象力<br>善于激励和鼓舞他人<br>适应力强，灵活变通
+              </div>
+              <div style="background:rgba(255,149,0,0.08);border-radius:10px;padding:10px;font-size:11px;color:#7c4a00;line-height:1.5;">
+                <div style="font-weight:700;color:#FF9500;margin-bottom:4px;">&#9650; 成长方向</div>
+                容易对常规事务失去兴趣<br>难以长时间专注于细节<br>过于理想化而忽视现实<br>拖延重要但不紧急的事
+              </div>
+            </div>
+          </div>
+
+          <div class="action-btns">
+            <button class="unlock-btn">
+              <div style="font-size:15px;">&#128274; 解锁详细报告</div>
+              <div style="font-size:12px;opacity:0.9;margin-top:2px;">¥9.9 永久解锁</div>
+            </button>
+            <button class="share-btn">&#8613; 分享结果</button>
+          </div>
+        </div>
+      </div>
+      <div class="label">结果页</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

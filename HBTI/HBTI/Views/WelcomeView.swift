@@ -104,7 +104,7 @@ struct WelcomeView: View {
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(
-                        (username.isEmpty || !agreedToTerms) ? Color.gray : ColorPalette.primaryGradient
+                        (username.isEmpty || !agreedToTerms) ? AnyView(Color.gray) : AnyView(ColorPalette.primaryGradient)
                     )
                     .cornerRadius(16)
                     .shadow(color: Color(hex: "#7B68EE").opacity(0.4), radius: 12, x: 0, y: 6)
@@ -124,10 +124,19 @@ struct WelcomeView: View {
                             .foregroundStyle(agreedToTerms ? ColorPalette.dimensionColor(.ei) : Color.gray.opacity(0.4))
                     }
                     
-                    Text("我已阅读并同意") + Text(" 《服务条款》").foregroundColor(ColorPalette.dimensionColor(.ei)).onTapGesture { showTerms = true } + Text(" 和 ") + Text(" 《隐私政策》").foregroundColor(ColorPalette.dimensionColor(.ei)).onTapGesture { showPrivacy = true }
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
+                    HStack(spacing: 0) {
+                        Text("我已阅读并同意")
+                        Text(" 《服务条款》")
+                            .foregroundColor(ColorPalette.dimensionColor(.ei))
+                            .onTapGesture { showTerms = true }
+                        Text(" 和 ")
+                        Text(" 《隐私政策》")
+                            .foregroundColor(ColorPalette.dimensionColor(.ei))
+                            .onTapGesture { showPrivacy = true }
+                    }
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 4)
@@ -188,7 +197,7 @@ struct TermsOfServiceView: View {
                         .foregroundColor(.secondary)
                     
                     Section("1. 服务概述") {
-                        Text("HBTI 16型人格测试（以下简称"本应用"）是由汇成家开发并运营的人格评估工具。本应用基于荣格心理类型理论，提供28题简版、48题通用版和93题完整版三种人格评估服务。使用本应用即表示您同意以下条款。")
+                        Text("HBTI 16型人格测试（以下简称\"本应用\"）是由汇成家开发并运营的人格评估工具。本应用基于荣格心理类型理论，提供28题简版、48题通用版和93题完整版三种人格评估服务。使用本应用即表示您同意以下条款。")
                     }
                     
                     Section("2. 用户账号") {
@@ -281,7 +290,7 @@ struct PrivacyPolicyView: View {
                     }
                     
                     Section("6. 用户权利") {
-                        Text("您对您的个人信息享有以下权利：\n• 查看权：您可以随时在应用内查看您的测试历史记录\n• 删除权：您可以随时删除单条或多条测试记录\n• 更正权：您可以修改您的昵称信息\n• 撤回同意：您可以卸载本应用以完全清除所有数据\n• 恢复购买：您可以随时使用"恢复购买"功能恢复已购买的内容")
+                        Text("您对您的个人信息享有以下权利：\n• 查看权：您可以随时在应用内查看您的测试历史记录\n• 删除权：您可以随时删除单条或多条测试记录\n• 更正权：您可以修改您的昵称信息\n• 撤回同意：您可以卸载本应用以完全清除所有数据\n• 恢复购买：您可以随时使用\"恢复购买\"功能恢复已购买的内容")
                     }
                     
                     Section("7. 数据安全") {
@@ -293,7 +302,7 @@ struct PrivacyPolicyView: View {
                     }
                     
                     Section("9. 隐私政策的更新") {
-                        Text("我们可能会不时更新本隐私政策。更新后的隐私政策将在本应用内公布，并更新"最后更新日期"。重大变更将通过应用更新或弹窗通知的方式告知您。继续使用本应用即表示您同意更新后的隐私政策。")
+                        Text("我们可能会不时更新本隐私政策。更新后的隐私政策将在本应用内公布，并更新\"最后更新日期\"。重大变更将通过应用更新或弹窗通知的方式告知您。继续使用本应用即表示您同意更新后的隐私政策。")
                     }
                     
                     Section("10. 联系我们") {

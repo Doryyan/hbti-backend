@@ -279,7 +279,7 @@ struct QuestionCardView: View {
                 .padding(.top, 4)
                 
                 // 当前选中反馈
-                Text(LikertSlider.levelLabels[LikertSlider.currentLevelIndex(sliderValue)])
+                Text(hbti_levelLabels[LikertSlider.currentLevelIndex(sliderValue)])
                     .font(.headline)
                     .foregroundColor(ColorPalette.dimensionColor(question.dimension))
                     .transition(.scale)
@@ -328,14 +328,15 @@ struct QuestionCardView: View {
     }
 }
 
+private let hbti_levelLabels = ["非常不符", "不太符", "一般", "比较符", "非常符"]
+private let hbti_levelLabelsFull = ["非常不符合", "不太符合", "一般", "比较符合", "非常符合"]
+
 struct LikertSlider: View {
     @Binding var value: Double
     let dimension: PersonalityDimension
     @State private var isDragging = false
     
-    static let levelLabels = ["非常不符", "不太符", "一般", "比较符", "非常符"]
     
-    static let levelLabelsFull = ["非常不符合", "不太符合", "一般", "比较符合", "非常符合"]
     
     static func currentLevelIndex(_ value: Double) -> Int {
         return Int(round(value * 4))
@@ -346,7 +347,7 @@ struct LikertSlider: View {
             let width = geometry.size.width
             let trackHeight: CGFloat = 10
             let knobSize: CGFloat = 32
-            let stepWidth = width / CGFloat(levelLabels.count - 1)
+            let stepWidth = width / CGFloat(hbti_levelLabels.count - 1)
             let dimColor = ColorPalette.dimensionColor(dimension)
             
             VStack(spacing: 0) {
@@ -361,7 +362,7 @@ struct LikertSlider: View {
                         .fill(Color.gray.opacity(0.1))
                     
                     // 段落分隔线 — 5个停靠点位置
-                    ForEach(0..<levelLabels.count, id: \.self) { index in
+                    ForEach(0..<hbti_levelLabels.count, id: \.self) { index in
                         let x = CGFloat(index) * stepWidth
                         Rectangle()
                             .fill(Color.white.opacity(0.6))
@@ -438,7 +439,7 @@ struct LikertSlider: View {
                 
                 // 停靠点 — 带脉冲动画的圆点
                 HStack(spacing: 0) {
-                    ForEach(0..<levelLabels.count, id: \.self) { index in
+                    ForEach(0..<hbti_levelLabels.count, id: \.self) { index in
                         let isSelected = index == Self.currentLevelIndex(value)
                         
                         ZStack {
@@ -472,11 +473,11 @@ struct LikertSlider: View {
                 
                 // 标签行 — 每个标签精确定位在停靠点正下方
                 ZStack(alignment: .leading) {
-                    ForEach(0..<levelLabels.count, id: \.self) { index in
+                    ForEach(0..<hbti_levelLabels.count, id: \.self) { index in
                         let x = CGFloat(index) * stepWidth
                         let isSelected = index == Self.currentLevelIndex(value)
                         
-                        Text(levelLabels[index])
+                        Text(hbti_levelLabels[index])
                              .font(.system(size: 7))
                              .foregroundColor(
                                  isSelected
@@ -496,9 +497,9 @@ struct LikertSlider: View {
     }
     
     private func snapToStep(_ rawValue: Double) -> Double {
-        let step = 1.0 / Double(levelLabels.count - 1)
+        let step = 1.0 / Double(hbti_levelLabels.count - 1)
         let index = round(rawValue / step)
-        return index * step
+        return Double(index * step)
     }
     
     private func generateHaptic() {
