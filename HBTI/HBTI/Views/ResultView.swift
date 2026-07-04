@@ -355,54 +355,60 @@ struct StrengthWeaknessCard: View {
                 .font(.headline)
                 .foregroundColor(.primary)
             
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: 10) {
                 // 优势列
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: 6) {
                     HStack(spacing: 4) {
-                        Image(systemName: "sparkles")
+                        Image(systemName: "checkmark")
                             .font(.caption)
                             .foregroundColor(.green)
                         Text("优势")
                             .font(.caption)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.secondary)
+                            .fontWeight(.bold)
+                            .foregroundColor(.green)
                     }
                     
-                    ForEach(type.strengths, id: \.self) { strength in
-                        Text(strength)
-                            .font(.caption)
-                            .foregroundColor(.primary)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 6)
-                            .background(Color.green.opacity(0.1))
-                            .cornerRadius(12)
-                            .fixedSize(horizontal: false, vertical: true)
+                    VStack(alignment: .leading, spacing: 4) {
+                        ForEach(type.strengths, id: \.self) { strength in
+                            Text("\(strength)")
+                                .font(.caption2)
+                                .foregroundColor(Color(hex: "#2d6a4f"))
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(Color.green.opacity(0.08))
+                                .cornerRadius(8)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 
-                // 成长空间列
-                VStack(alignment: .leading, spacing: 8) {
+                // 成长方向列
+                VStack(alignment: .leading, spacing: 6) {
                     HStack(spacing: 4) {
-                        Image(systemName: "arrow.triangle.2.circlepath")
+                        Image(systemName: "arrow.up")
                             .font(.caption)
                             .foregroundColor(.orange)
-                        Text("成长空间")
+                        Text("成长方向")
                             .font(.caption)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.secondary)
+                            .fontWeight(.bold)
+                            .foregroundColor(.orange)
                     }
                     
-                    ForEach(type.weaknesses, id: \.self) { weakness in
-                        Text(weakness)
-                            .font(.caption)
-                            .foregroundColor(.primary)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 6)
-                            .background(Color.orange.opacity(0.1))
-                            .cornerRadius(12)
-                            .fixedSize(horizontal: false, vertical: true)
+                    VStack(alignment: .leading, spacing: 4) {
+                        ForEach(type.weaknesses, id: \.self) { weakness in
+                            Text("\(weakness)")
+                                .font(.caption2)
+                                .foregroundColor(Color(hex: "#7c4a00"))
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(Color.orange.opacity(0.08))
+                                .cornerRadius(8)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
         .padding()

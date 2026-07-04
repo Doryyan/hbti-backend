@@ -116,7 +116,7 @@ struct ProgressBarView: View {
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 4)
                     .fill(Color.gray.opacity(0.2))
-                    .frame(height: 8)
+                    .frame(height: 6)
                 
                 RoundedRectangle(cornerRadius: 4)
                     .fill(ColorPalette.primaryGradient)
@@ -124,7 +124,7 @@ struct ProgressBarView: View {
                     .animation(.easeInOut(duration: 0.3), value: viewModel.progress)
             }
         }
-        .frame(height: 8)
+        .frame(height: 6)
     }
 }
 
@@ -263,14 +263,14 @@ struct QuestionCardView: View {
                 
                 // 维度端点说明
                 HStack {
-                    Text(question.dimension.leftLabel)
+                    Text("▲ \(question.dimension.leftLabel)")
                         .font(.caption)
                         .fontWeight(.medium)
                         .foregroundColor(ColorPalette.dimensionColor(question.dimension))
                     
                     Spacer()
                     
-                    Text(question.dimension.rightLabel)
+                    Text("\(question.dimension.rightLabel) ▲")
                         .font(.caption)
                         .fontWeight(.medium)
                         .foregroundColor(ColorPalette.dimensionColor(question.dimension))
